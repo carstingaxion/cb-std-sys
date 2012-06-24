@@ -1,7 +1,0 @@
-
-#
-# Write a tag message
-# Lines starting with '#' will be ignored.
-#
-
-tagging 0.1.1

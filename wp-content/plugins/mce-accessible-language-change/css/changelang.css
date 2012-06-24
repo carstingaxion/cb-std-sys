@@ -1,0 +1,9 @@
+/* This styles for span lang (language change) can be overridden in your stylesheet directory in editor-style.css.
+  If your have already editor-style.css in your theme, this styles will be overriden, you have to copy the styles here
+  into your editor-styles.css to get your language changes visible */
+span[lang],
+.lang {
+    background: #f8f8f8;
+    border: 1px solid #d2d0ce;
+    padding: 2px;
+}

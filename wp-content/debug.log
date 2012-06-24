@@ -1,0 +1,52 @@
+[17-Nov-2011 18:32:46] PHP Notice:  Undefined variable: control_ops in E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map\widgets\last-posts-widget.php on line 12
+[17-Nov-2011 18:32:46] PHP Notice:  Undefined index:  solo-comment-subscribe in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php(974) : runtime-created function on line 1
+[17-Nov-2011 18:32:46] PHP Notice:  Constant CUSTOM_TAGS already defined in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1320
+[17-Nov-2011 18:32:47] PHP Notice:  Undefined variable: control_ops in E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map\widgets\last-posts-widget.php on line 12
+[17-Nov-2011 18:32:47] PHP Notice:  Undefined index:  solo-comment-subscribe in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php(974) : runtime-created function on line 1
+[17-Nov-2011 18:32:47] PHP Notice:  Constant CUSTOM_TAGS already defined in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1320
+[17-Nov-2011 18:32:47] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:47] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:47] PHP Notice:  Use of undefined constant comment_count - assumed 'comment_count' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:48] PHP Notice:  Undefined variable: control_ops in E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map\widgets\last-posts-widget.php on line 12
+[17-Nov-2011 18:32:48] PHP Notice:  Undefined index:  solo-comment-subscribe in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php(974) : runtime-created function on line 1
+[17-Nov-2011 18:32:48] PHP Notice:  Constant CUSTOM_TAGS already defined in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1320
+[17-Nov-2011 18:32:48] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:48] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:48] PHP Notice:  Use of undefined constant comment_count - assumed 'comment_count' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:48] PHP Notice:  Undefined variable: control_ops in E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map\widgets\last-posts-widget.php on line 12
+[17-Nov-2011 18:32:48] PHP Notice:  Undefined index:  solo-comment-subscribe in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php(974) : runtime-created function on line 1
+[17-Nov-2011 18:32:48] PHP Notice:  Constant CUSTOM_TAGS already defined in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1320
+[17-Nov-2011 18:32:49] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:49] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[17-Nov-2011 18:32:49] PHP Notice:  Use of undefined constant comment_count - assumed 'comment_count' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined index:  solo-comment-subscribe in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php(974) : runtime-created function on line 1
+[29-Nov-2011 09:25:40] PHP Notice:  Constant CUSTOM_TAGS already defined in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1294
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 78
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 80
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 82
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 84
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 86
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 95
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_plugins_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 115
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 116
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 142
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 150
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 151
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: bwp_minify_themes_url_addon in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 155
+[29-Nov-2011 09:25:40] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 200
+[29-Nov-2011 09:25:40] PHP Notice:  Use of undefined constant comment_status - assumed 'comment_status' in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\functions_userweb.php on line 210
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: fbml in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\header.php on line 11
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: fbml in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\header.php on line 12
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: fbml in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\header.php on line 13
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: fbml in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\header.php on line 14
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: fbml in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\header.php on line 15
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: post in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1015
+[29-Nov-2011 09:25:40] PHP Notice:  Trying to get property of non-object in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1015
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: raw_excerpt in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 891
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: post in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1015
+[29-Nov-2011 09:25:40] PHP Notice:  Trying to get property of non-object in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1015
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: raw_excerpt in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 891
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: amb in E:\xampp\htdocs\standard\wp-content\themes\cb-std-sys\inc\hook_frontend.php on line 1083
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined variable: update in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php on line 843
+[29-Nov-2011 09:25:40] PHP Notice:  get_settings ist seit Version 2.1 <strong>veraltet</strong>! Benutze stattdessen get_option(). in E:\xampp\htdocs\standard\wp-includes\functions.php on line 3382
+[29-Nov-2011 09:25:40] PHP Notice:  Undefined index:  default_subscribed in E:\xampp\htdocs\standard\wp-content\plugins\subscribe-to-double-opt-in-comments\subscribe-to-doi-comments.php on line 345
