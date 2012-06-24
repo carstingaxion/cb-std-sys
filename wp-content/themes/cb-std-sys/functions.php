@@ -240,6 +240,7 @@ add_action( 'init', 'keep_out_subscribers_and_anonymous', 0 );
 include_once 'inc/changelog.php';
 include_once 'inc/cbstdsys_options.php';
 include_once 'inc/hook_search.php';
+include_once 'inc/update.php';
 /*******************************************************************************
  *
  *  Dashboard and Admin-Add-Ons

@@ -129,7 +129,8 @@ embed,
 object,
 video,
 iframe,
-table {
+table,
+figure {
   max-width: 100%;
 }
 

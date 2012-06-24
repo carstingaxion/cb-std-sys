@@ -135,21 +135,3 @@ body.login #backtoblog a{
 
 
 
-
-/** [shortcode] and params */
-#screen-meta dl{
-  margin-left:20px;
-  list-style-type: lower-alpha;
-  
-}
-
-#screen-meta dt{
-  clear: left;
-  float: left;
-  width: 15%;
-}
-
-#screen-meta dd{
-  width:85%;
-  float:left;
-}

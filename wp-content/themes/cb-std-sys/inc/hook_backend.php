@@ -415,8 +415,8 @@
         $translated = str_ireplace(  'Post', 'Article', $translated );  // ireplace is PHP5 only
         return $translated;
     }
-    add_filter(  'gettext',  'change_post_to_article'  );
-    add_filter(  'ngettext',  'change_post_to_article'  );
+    #add_filter(  'gettext',  'change_post_to_article'  );
+    #add_filter(  'ngettext',  'change_post_to_article'  );
 
  
     

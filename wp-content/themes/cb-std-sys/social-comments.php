@@ -1,3 +1,4 @@
+<?php if( class_exists('Social') ) : ?>
 <div id="social" class="box">
 <?php
 ob_start();
@@ -104,3 +105,4 @@ foreach ($order as $block) {
 }
 ?>
 </div>
+<?php endif; ?>
