@@ -333,7 +333,7 @@
      */                    
     function change_footer_admin () {
         echo __('You\'re working with','cb-std-sys')." <a href='http://www.wordpress.org' target='_blank'>WordPress</a> \n";
-        echo __('maintained &amp; designed by','cb-std-sys')." <a href='http://carsten-bach.de' target='_blank'>Carsten Bach</a>\n";
+        echo __('maintained &amp; designed by','cb-std-sys')." <a href='http://carsten-bach.de' target='_blank'>".cbstdsys_opts('a_admin_name')."</a>\n";
     }
     add_filter('admin_footer_text', 'change_footer_admin', 9999);  
     
@@ -412,11 +412,13 @@
      *  
      */                    
     function change_post_to_article( $translated ) {
-        $translated = str_ireplace(  'Post', 'Article', $translated );  // ireplace is PHP5 only
+				$translated = str_ireplace(  'Post', 'Article', $translated );  // ireplace is PHP5 only
         return $translated;
     }
-    #add_filter(  'gettext',  'change_post_to_article'  );
-    #add_filter(  'ngettext',  'change_post_to_article'  );
+    if ( WP_LANG == 'en_EN' ) {
+		    add_filter(  'gettext',  'change_post_to_article'  );
+		    add_filter(  'ngettext',  'change_post_to_article'  );
+    }
 
  
     

@@ -20,7 +20,8 @@ body.error-doc{
 }
 
 div#error-msg {
-    margin: 7em auto;
+    margin: auto;
+    padding: 114px 0 0;
     width: 320px;
 }
 
@@ -132,6 +133,10 @@ body.login #backtoblog a{
     width: 100%;
 }
 
-
+.toplevel_page_cbstdsys .wrap .disabled * {
+    font-style: italic;
+    text-decoration: line-through;
+    opacity:.75;
+}
 
 

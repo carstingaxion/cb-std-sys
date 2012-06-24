@@ -117,7 +117,7 @@ if ( is_admin() ) {
 
 
 						/**
-		         *  Translations for jQuery Quciktags
+		         *  Translations for jQuery Quicktags
 		         *
 		         *  @since    0.1.4
 		         */

@@ -1,7 +1,7 @@
 <?php
  
  // @todo manually set this in style.css
-define('CB_STD_SYS_VERSION','0.1.4');
+define('CB_STD_SYS_VERSION','0.1.8');
 
 
 if(!defined('WP_THEME_URL')) {
@@ -9,7 +9,37 @@ if(!defined('WP_THEME_URL')) {
 }
 /**
  *  Changelog
- *  
+ *
+******  Version 0.1.8   22.02.2012
+		header.php
+		  - DEL:  <link rel="profile" href="http://gmpg.org/xfn/11" />
+
+		hook_backend.php
+		  - FIX:  replacement of "post" to "article" is now only done when WP_LANG is english
+		
+		hook_frontend.php
+		  - DEL:  removed "adjust GeoMashup Output", 'cause we're going to use only WP-Cloudmademaps since now
+		  - FIX:  Google-Analytics Tracking Code now only tracks www. calls, to keep assets. cookie-free for better caching
+		  - FIX:  Log 404-Errors only with relative, not with absolute pathes
+		  
+		cbstdsys_options.php
+		  - FIX: set default wp- option 'upload_url_path' to 'assets.WP_SITEURL'
+		  - ADD: show unused options as "disabled"
+
+******  Version 0.1.7   05.02.2012
+
+		hook_frontend.php
+		  - FIX: load defaultindex.php from childtheme directory
+
+		functions.php
+		  - DEL:  debug() comes now from own mu-plugin CLASS firePHPdebug()
+
+******  Version 0.1.6   18.01.2012
+
+		update.php
+		  - ADD:  enabled automatic theme-updates via the theme-menu
+		  
+		  
 ******  Version 0.1.5   22.11.2011
 
 		cbstdsys_options.php
@@ -20,7 +50,7 @@ if(!defined('WP_THEME_URL')) {
 			- DEL:  prevent_admin_access()
 			- ADD: 	childtheme default css to login_head
 			- ADD:  define allowed html-tags for comments
-			
+
 			
 ******  Version 0.1.4   03.11.2011
 

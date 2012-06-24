@@ -45,7 +45,6 @@
 <?php }?>
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<meta name="description" content="<?php echo get_meta_description( $post ) ?>">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<meta name='robots' content='<?php if ((is_home() && ($paged < 2 )) || is_single() || is_page() || is_category()) {
 	echo "index,archive,follow";  } else { 	echo "noindex,noarchive,follow";} ?>'>
 <?php /**

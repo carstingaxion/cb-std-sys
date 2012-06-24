@@ -2,15 +2,15 @@
 
     /**
      *  show default index page until Live-Launch
-     *  
+     *
      *  @since    0.0.6
-     *  
-     */                    
+     *
+     */
     function default_index_html() {
-        include_once $_SERVER['DOCUMENT_ROOT'].'/defaultindex.php';   die();
+        include_once $_SERVER['DOCUMENT_ROOT'].get_stylesheet_directory_uri().'/defaultindex.php';   die();
     }
     if ( cbstdsys_opts('a_default_index') && !is_user_logged_in()  ) {
-        add_action('get_header', 'default_index_html'); 
+        add_action('get_header', 'default_index_html');
     }
 
 
@@ -167,54 +167,7 @@
     add_filter('pre_option_rss_language', 'change_rss_lang');        
        
     
-    
-    /**
-     *  adjust GeoMashup Output
-     *  
-     *  - prevent Plugin Loading
-     *  - remove css files
-     *  - remove js files     
-     *  + add <meta> Elements with geo-information
-     *  
-     *  @since    0.0.7
-     *  
-     */                                            
-    if ( class_exists( 'GeoMashup' ) ) { 
-    
-        remove_action( 'init', array('GeoMashup', 'init') );    
-        remove_action( 'wp_head', array('GeoMashup', 'wp_head'));
-        add_action ( 'wp_head', 'myGeoMashupWpHead' );
-        
-        function myGeoMashupWpHead(){
-        		global $wp_query;
-         		
-            $loc = GeoMashupDB::get_object_location( 'post', $wp_query->post->ID );      
-        		if (is_singular() && !empty($loc))	{
-        				$title = esc_html(convert_chars(strip_tags(get_bloginfo('name'))." - ".$wp_query->post->post_title));
-                echo '  <meta name="ICBM" content="' . esc_attr( $loc->lat . ', ' . $loc->lng ) . '">' . "\n\t";
-        				echo '  <meta name="DC.title" content="' . esc_attr( $title ) . '">' . "\n";
-        				echo '  <meta name="geo.position" content="' .  esc_attr( $loc->lat . ';' . $loc->lng ) . '">' . "\n";
-    						echo '  <meta name="geo.region" content="' . esc_attr( $loc->country_code ) . '">' . "\n";
-    						echo '  <meta name="geo.placename" content="' . esc_attr( $loc->address ) . '">' . "\n";
-        		}
-        		else  {
-        			$saved_locations = GeoMashupDB::get_saved_locations( );
-        			if ( !empty( $saved_locations ) )
-        			{
-        				foreach ( $saved_locations as $saved_location ) {
-        					if ( $saved_location->saved_name == 'default' ) {
-        						$title = esc_html(convert_chars(strip_tags(get_bloginfo('name'))));
-        						echo '  <meta name="ICBM" content="' . esc_attr( $saved_location->lat . ', ' . $saved_location->lng ) . '">'. "\n";
-        						echo '  <meta name="DC.title" content="' . esc_attr( $title ) . '">' . "\n";
-        						echo '  <meta name="geo.position" content="' . esc_attr( $saved_location->lat . ';' . $saved_location->lng ) . '">' . "\n";
-        						echo '  <meta name="geo.region" content="' . esc_attr( $saved_location->country_code ) . '">' . "\n";
-        						echo '  <meta name="geo.placename" content="' . esc_attr( $saved_location->address ) . '">' . "\n";
-        					}
-                }
-        			}
-        		}
-        }
-    }
+
     
     
     /**
@@ -290,7 +243,7 @@
      *  
      */                    
     function add_google_analytics_section () { ?>
-  <script>var _gaq=[["_setAccount","UA-<?php echo cbstdsys_opts('m_ga_tracking'); ?>"],["_trackPageview"],['_gat._anonymizeIp'],['_trackPageLoadTime']];
+  <script>var _gaq=[["_setAccount","UA-<?php echo cbstdsys_opts('m_ga_tracking'); ?>"],["_trackPageview"],['_gat._anonymizeIp'],['_trackPageLoadTime'],['_setDomainName("<?php echo str_replace('http://','',WP_SITEURL)?>")']];
   setTimeout('_gaq.push([\'_trackEvent\', \'NoBounce\', \'Over 10 seconds\'])',10000);
   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
   g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
@@ -558,12 +511,12 @@
         $content = str_replace($current_path, $new_path, $content);
         return $content;
     }
-		if (!class_exists('BWP_MINIFY')) {
+		#if (!class_exists('BWP_MINIFY')) {
 				define('WP_PLUGIN_URL', WP_HOME.'/plugins');
 				define('PLUGINDIR', WP_HOME . '/plugins' );
 		    add_filter('plugins_url', 'clean_plugins_path');
 		    add_filter('bloginfo', 'clean_plugins_path');
-    }
+    #}
 
 
 
@@ -600,7 +553,8 @@
     function log_404() {
     	if (is_404() && get_settings('permalink_structure')) {
     	   $log_line  = '[client: '. $_SERVER['REMOTE_ADDR'] .'] ';
-    		 $log_line .= 'File does not exsist: '. substr(ABSPATH, 0, -1) . $_SERVER['REQUEST_URI'];
+    		 #$log_line .= 'File does not exsist: '. substr(ABSPATH, 0, -1) . $_SERVER['REQUEST_URI'];
+    		 $log_line .= 'File does not exsist: '. $_SERVER['REQUEST_URI'];
     		if ($_SERVER['HTTP_REFERER'])
     			$log_line .= ', referer: '.$_SERVER['HTTP_REFERER'];
     		error_log($log_line, 0);
@@ -637,7 +591,7 @@
     }
     function do_send_errorlog_to_admin() {
         if ( file_get_contents( WP_CONTENT_DIR."/php_error.log" ) != '' )
-    	  wp_mail('mail@carsten-bach.de', 'Error Log von "'.get_bloginfo('name').'"', file_get_contents( WP_CONTENT_DIR."/php_error.log" ) );
+    	  wp_mail( cbstdsys_opts('a_admin_email'), 'Error Log von "'.get_bloginfo('name').'"', file_get_contents( WP_CONTENT_DIR."/php_error.log" ) );
     }
     add_action( 'send_errorlog_to_admin', 'do_send_errorlog_to_admin' );    
     
@@ -672,10 +626,10 @@
 
     /**
      *  use personalized CSS-styles for Login Screen
-     *  
+     *
      *  @since    0.0.1
-     *  
-     */                    
+     *
+     */
     function cbstdsys_login_css() {
 				# cb-std-sys base styles
 				echo '<link href="'.get_bloginfo("template_url"). '/css/cb_std_sys_admin.css" rel="stylesheet" />';
@@ -683,10 +637,24 @@
 				$child_admin_style  = get_stylesheet_directory_uri().'/css/cb_std_sys_admin.css';
 				echo '<link href="'.$child_admin_style. '" rel="stylesheet" />';
     }
-    add_action('login_head', 'cbstdsys_login_css');
+    add_action('login_head', 'cbstdsys_login_css',999);
 
-    
-    
+/*
+		function cbstdsys_login_css() {
+				# cb-std-sys base styles
+				$cbstdsys_admin_style = get_bloginfo("template_url"). '/css/cb_std_sys_admin.css';
+				# childtheme modification
+				$child_admin_style  = get_stylesheet_directory_uri().'/css/cb_std_sys_admin.css';
+
+				#wp_admin_css( 'wp-admin', true );
+				#wp_admin_css( 'colors-fresh', true );
+  			#wp_enqueue_style( 'wp-admin' );
+				wp_enqueue_style( 'cbstdsys-admin', $cbstdsys_admin_style, false, CB_STD_SYS_VERSION );
+				wp_enqueue_style( 'child-admin', $child_admin_style, false, CB_STD_SYS_VERSION );
+    }
+    add_action('login_head', 'cbstdsys_login_css');
+    #add_action('default_index_head', 'cbstdsys_login_css');
+ */
     /**
      *  define custom login-header-url
      *  link to website-home, not to WP
@@ -1324,4 +1292,19 @@
 		add_action('init', 'my_html_tags_code', 10);
 
 
+
+
+
+function path_add_rewrites($content) {
+  $theme_name = next(explode('/themes/', get_stylesheet_directory()));
+  global $wp_rewrite;
+  $roots_new_non_wp_rules = array(
+    'css/(.*)'      => 'wp-content/themes/'. $theme_name . '/css/$1',
+    'js/(.*)'       => 'wp-content/themes/'. $theme_name . '/js/$1',
+    'img/(.*)'      => 'wp-content/themes/'. $theme_name . '/img/$1',
+    'plugins/(.*)'  => 'wp-content/plugins/$1',
+  );
+  $wp_rewrite->non_wp_rules += $roots_new_non_wp_rules;
+}
+add_action('generate_rewrite_rules', 'path_add_rewrites');
 ?>

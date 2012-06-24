@@ -55,6 +55,8 @@ function cbstdsys_add_defaults() {
 		// Administration
            ,"a_admin_user_IDs"        => array('1')
 					 ,"a_default_index"         => ""
+					 ,"a_admin_name"         		=> "Carsten Bach"
+					 ,"a_admin_email"         	=> "mail@carsten-bach.de"
 		);
 		update_option('cbstdsys_options', $cbstdsys_defaults);
 		
@@ -74,7 +76,7 @@ function cbstdsys_add_defaults() {
         'rss_language' => 'de',
 //        'timezone_string' => 'UTC+2',
         'use_smilies' => 0,
-        'upload_url_path' =>  str_replace( array( 'http://www.', 'http://' ) , 'http://assets.', SITEURL ),
+        'upload_url_path' =>  str_replace( array( 'http://www.', 'http://' ) , 'http://assets.', WP_SITEURL ),
     );
     foreach ( $o as $k => $v ) {
         update_option($k, $v);
@@ -127,7 +129,7 @@ function cbstdsys_render_form() {
       					</td>
       				</tr>
       				
-        			<tr valign="top">
+        			<tr valign="top" class="disabled">
         					<th scope="row"><?php _e('Secured Areas','cb-std-sys'); ?></th>
         					<td>
         						<label><input name="cbstdsys_options[c_private_content]" type="checkbox" value="1" <?php if (isset($options['c_private_content'])) { checked('1', $options['c_private_content']); } ?> /> <?php _e('use private content parts','cb-std-sys'); ?></label><br />
@@ -158,16 +160,6 @@ function cbstdsys_render_form() {
       					</td>
       				</tr>
 
-        			<tr valign="top">
-        					<th scope="row"><?php _e('Video Documentation','cb-std-sys'); ?></th>
-        					<td>
-        						<label><input name="cbstdsys_options[c_video_doc]" type="checkbox" value="1" <?php if (isset($options['c_video_doc'])) { checked('1', $options['c_video_doc']); } ?> /> <?php _e('Show contextual Videotutorials on the Backend','cb-std-sys'); ?></label><br />
-        						<?php if ( $options['c_video_doc'] && !class_exists( 'ContextualRssHelp' ) ) { 
-                          echo '<div class="error"><p><span class="error-topic">'.__('Video Documentation','cb-std-sys').':</span>Activate <a href="'.admin_url('plugins.php').'#contextual-help-via-rss"><strong>Contextual Help via RSS</strong></a> Plugin</p></div>';
-                    }  ?>
-                	</td>
-        				</tr>  
-                                                                      
            </table>
              
         </fieldset>
@@ -244,7 +236,7 @@ function cbstdsys_render_form() {
 								</td>
       				</tr>   
           
-      			  <tr valign="top">
+      			  <tr valign="top" class="disabled">
       					<th scope="row"><?php _e('Link-Listings','cb-std-sys'); ?></th>
       					<td>
       						<label><input name="cbstdsys_options[m_links]" type="checkbox" value="1" <?php if (isset($options['m_links'])) { checked('1', $options['m_links']); } ?> /> <?php _e('Use the WP Links feature','cb-std-sys'); ?></label><br />
@@ -285,28 +277,28 @@ function cbstdsys_render_form() {
       					</td>
       				</tr>                       					      
           
-      			  <tr valign="top">
+      			  <tr valign="top" class="disabled">
       					<th scope="row"><?php _e('Maps','cb-std-sys'); ?></th>
       					<td>
       						<label><input name="cbstdsys_options[m_maps]" type="checkbox" value="1" <?php if (isset($options['m_maps'])) { checked('1', $options['m_maps']); } ?> /> <?php _e('Use mapping application','cb-std-sys'); ?></label><br />
       					</td>
       				</tr>   
           
-      			  <tr valign="top">
+      			  <tr valign="top" class="disabled">
       					<th scope="row"><?php _e('Galleries','cb-std-sys'); ?></th>
       					<td>
       						<label><input name="cbstdsys_options[m_galleries]" type="checkbox" value="1" <?php if (isset($options['m_galleries'])) { checked('1', $options['m_galleries']); } ?> /> <?php _e('Use WP Gallery feature','cb-std-sys'); ?></label><br />
       					</td>
       				</tr>                    
           
-      			  <tr valign="top">
+      			  <tr valign="top" class="disabled">
       					<th scope="row"><?php _e('Audio & Video','cb-std-sys'); ?></th>
       					<td>
       						<label><input name="cbstdsys_options[m_audio_video]" type="checkbox" value="1" <?php if (isset($options['m_audio_video'])) { checked('1', $options['m_audio_video']); } ?> /> <?php _e('Make use of audio- and video-content','cb-std-sys'); ?></label><br />
       					</td>
       				</tr>   
           
-      			  <tr valign="top">
+      			  <tr valign="top" class="disabled">
       					<th scope="row"><?php _e('Newsletter','cb-std-sys'); ?></th>
       					<td>
       						<label><input name="cbstdsys_options[m_newsletter]" type="checkbox" value="1" <?php if (isset($options['m_newsletter'])) { checked('1', $options['m_newsletter']); } ?> /> <?php _e('Use newsletter','cb-std-sys'); ?></label><br />
@@ -354,7 +346,7 @@ function cbstdsys_render_form() {
           
     			<table class="form-table">
 
-        			<tr valign="top">
+        			<tr valign="top" class="disabled">
         					<th scope="row"><?php _e('Backups','cb-std-sys'); ?></th>
         					<td>
         						<label><input name="cbstdsys_options[s_core_bu]" type="checkbox" value="1" <?php if (isset($options['s_core_bu'])) { checked('1', $options['s_core_bu']); } ?> /> <?php _e('do core backups, including the themes folder','cb-std-sys'); ?></label><br />
@@ -384,6 +376,22 @@ function cbstdsys_render_form() {
       					</td>
       				</tr>                                                                        
 
+      				<tr>
+      					<th scope="row"><?php _e('Admin Name','cb-std-sys'); ?></th>
+      					<td>
+      						<input type="text" name="cbstdsys_options[a_admin_name]" value="<?php echo $options['a_admin_name']; ?>" />
+                  <span style="color:#666666;margin-left:2px;"><?php _e('Show as developer and contact person','cb-std-sys'); ?></span>
+      					</td>
+      				</tr>
+
+      				<tr>
+      					<th scope="row"><?php _e('Admin Email','cb-std-sys'); ?></th>
+      					<td>
+      						<input type="text" name="cbstdsys_options[a_admin_email]" value="<?php echo $options['a_admin_email']; ?>" />
+                  <span style="color:#666666;margin-left:2px;"><?php _e('Use as sidewide admin-address','cb-std-sys'); ?></span>
+      					</td>
+      				</tr>
+      				
         			<tr valign="top">
         					<th scope="row"><?php _e('Default Index-Page','cb-std-sys'); ?></th>
         					<td>
@@ -391,7 +399,7 @@ function cbstdsys_render_form() {
         						<?php if ( $options['a_default_index'] ) {
 															#if ( defined( WP_CACHE )  )
 		                          #echo '<div class="error"><p><span class="error-topic">'.__('Default Index-Page','cb-std-sys').':</span>'.__('Please deactivate Caching in <strong>wp-config.php</strong>.', 'cb-std-sys').'</div>';
-															if ( !file_exists(getenv("DOCUMENT_ROOT").'/defaultindex.php' ) )
+															if ( !file_exists($_SERVER['DOCUMENT_ROOT'].get_stylesheet_directory_uri().'/defaultindex.php' ) )
 		                          echo '<div class="error"><p><span class="error-topic">'.__('Default Index-Page','cb-std-sys').':</span>'.__('Please add a <strong>defaultindex.php</strong> to the docroot.', 'cb-std-sys').'</div>';
                     }  ?>
                 	</td>
@@ -454,6 +462,7 @@ function cbstdsys_validate_options($input) {
 // Administration
   $input['a_admin_user_IDs']      = explode( ',', $input['a_admin_user_IDs'] );
   $input['a_default_index']       = is_numeric( $input['a_default_index'] );
-  
+  $input['a_admin_name']          = wp_filter_nohtml_kses( $input['a_admin_name'] );
+  $input['a_admin_email']         = is_email( $input['a_admin_email'] );
   return $input;
 }

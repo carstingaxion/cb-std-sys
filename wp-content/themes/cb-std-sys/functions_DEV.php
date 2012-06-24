@@ -11,7 +11,7 @@ if ( is_admin() ) {
 		 *  @since  0.1.1
 		 *
 		 */
-
+#http://wordpressapi.com/2012/01/11/change-uploaded-image-name-to-post-slug-during-upload-using-variables/
 		function rename_media_save( $post, $attachment ) {
 
 #debug( $post['ID'] .' ===> '. $post['post_parent']);

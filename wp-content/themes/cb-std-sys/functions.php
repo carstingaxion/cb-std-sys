@@ -163,35 +163,7 @@ function find_value_in_postobjects_array($array, $property, $value) {
     return $flag;
 }
 
-/**
- *  Debug Helper
- *
- *  @since  0.1.2
 
-function debug ( $var, $arg = '' ) {
-		$current_user = wp_get_current_user();
-		if ( in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) || defined( 'WP_LOCAL_DEV' ) ) {
-				include_once( getenv("DOCUMENT_ROOT").'/FirePHPCore/fb.php' );
-				switch ($arg) {
-						case 'trace':
-								fb( $var, FirePHP::TRACE );
-								break;
-						case 'e':
-								fb( $var, FirePHP::ERROR );
-								break;
-						case 'w':
-								fb( $var, FirePHP::WARN );
-								break;
-						case 'i':
-								fb( $var, FirePHP::INFO );
-								break;
-						default:
-								fb( $var, FirePHP::LOG );
-								break;
-				}
-		}
-}
- */
 /**
  *  Get CB-STD-SYS Options
  *
@@ -255,16 +227,18 @@ if ( is_admin() ) {
  *******************************************************************************/
 } else {
     include_once 'inc/hook_frontend.php';
-    #include_once 'inc/template_shortcodes.php';
 }
 /*******************************************************************************
  *
  *  customized user web functions
  *
- *	use only when child-theme are not used, child themes can take its own functions.php
- *
  *******************************************************************************/
 include_once 'functions_userweb.php';
+
+
+
+
+
 
 
 
