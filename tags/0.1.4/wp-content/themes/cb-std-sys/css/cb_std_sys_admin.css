@@ -1,0 +1,155 @@
+/**
+ *
+ *  Login Screen
+ *  
+*/
+
+
+/**
+ *
+ *  Login, Apache Errordocs & Dashboard
+ *  
+*/
+html{  height:100%; }
+body.login,
+body.error-doc{
+  background-color:#232825;
+  height:100% !important;
+  max-width:100% !important;
+  overflow:hidden;  
+}
+
+div#error-msg {
+    margin: 7em auto;
+    width: 320px;
+}
+
+body.login h1 a,
+body.error-doc h1 a{
+	  background-image: url(../../../../../apple-touch-icon-72x72-precomposed.png) !important;
+    border-radius: 3px 3px 3px 3px;
+	  height:72px;
+		width: 72px;
+		padding: 0;
+		margin: 0 auto 15px;
+}
+
+body.login form,
+body.error-doc #error-box{
+  	box-shadow: 0 4px 18px #000;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 3px 3px 3px 3px;
+    font-weight: normal;
+    margin-left: 8px;
+    padding: 26px 24px 46px;
+}
+
+body.error-doc form#searchform-1 {
+    background: none;
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+body.error-doc label { display:none }
+body.error-doc ul{ margin: 0 0 0 1.5em;}
+body.error-doc li a{ color: #777777; }
+
+#error-box h2{ margin-bottom:1em;  }
+#error-box h3{ margin:1em 0 .25em;  }
+#error-box p{ margin-bottom:1em; color: #777777; font-size: 14px; }
+ 
+body.login #nav a,
+body.login #backtoblog a{
+  background:#fff;
+  padding:4px;
+  border-radius:4px;
+}
+
+.wp-admin #header-logo { 
+  background-image: url(../../../../favicon.ico) !important;
+}
+
+#dashboard-widgets .meta-box-sortables {
+  overflow-x:hidden!important;
+}
+
+/**
+ *
+ *  Artikel + Seiten Listen
+ *  
+*/
+
+.widefat th#author,
+.widefat th#thumbnail{
+  width:6%;
+}
+
+
+/**
+ *
+ *  TB Upload and Gallery Modal
+ *
+ */
+.exclude-from-gallery{	display:none;	}
+#gallery-form .exclude-from-gallery,
+#image-form .exclude-from-gallery{	display: table-row;	}
+
+
+#gallery-settings tbody tr:nth-child(1),
+#gallery-settings tbody tr:nth-child(4){	display:none;	}
+
+/**
+ *
+ *  Post Edit Screen
+ *
+ */
+#editorcontainer table.mceToolbar{	display: block!important;	}
+#postexcerpt textarea{	resize:none; width: 100%; height: 6em;}
+#slugdiv{display:none!important;}
+/**
+ *
+ *  Options Page
+ *  
+*/
+.toplevel_page_cbstdsys .error .error-topic{  width:200px; display: inline-block; }
+
+.toplevel_page_cbstdsys .wrap fieldset{ 
+  position: relative;
+  padding: 6em 0 0.5em;  
+}
+
+.toplevel_page_cbstdsys .wrap legend {
+    background: #eee;
+    display: block;
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: -3em 0 1em;
+    padding: 1em 0.5em;
+    position: absolute;
+    width: 100%;
+}
+
+
+
+
+
+/** [shortcode] and params */
+#screen-meta dl{
+  margin-left:20px;
+  list-style-type: lower-alpha;
+  
+}
+
+#screen-meta dt{
+  clear: left;
+  float: left;
+  width: 15%;
+}
+
+#screen-meta dd{
+  width:85%;
+  float:left;
+}

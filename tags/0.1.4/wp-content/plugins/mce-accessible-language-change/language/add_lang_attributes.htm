@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#changelang_dlg.attribs_title}</title>
+	<script type="text/javascript" src="../../../../wp-includes/js/tinymce/tiny_mce_popup.js?ver=327"></script>
+	<script type="text/javascript" src="../../../../wp-includes/js/tinymce/utils/mctabs.js?ver=327"></script>
+	<script type="text/javascript" src="../../../../wp-includes/js/tinymce/utils/form_utils.js?ver=327"></script>
+	<script type="text/javascript" src="../../../../wp-includes/js/tinymce/utils/editable_selects.js?ver=327"></script>
+	<script type="text/javascript" src="js/add_lang_attributes.js?ver=327"></script>
+	<link rel="stylesheet" type="text/css" href="css/add_lang_attributes.css?ver=327" />
+</head>
+<body style="display: none">
+<form onsubmit="insertAction();return false;" action="#">
+	<div class="tabs">
+		<ul>
+			<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#changelang_dlg.attribute_attrib_tab}</a></span></li>
+			
+		</ul>
+	</div>
+
+	<div class="panel_wrapper">
+		<div id="general_panel" class="panel current">
+			<fieldset>
+				<legend>{#changelang_dlg.attribute_attrib_tab}</legend>
+				<p class="help_text">{#changelang_dlg.attrib_help_text}</p>
+				<table border="0" cellpadding="0" cellspacing="4">
+					<tr>
+						<td class="label"><label id="langlabel" for="lang">{#changelang_dlg.attribute_label_langcode}</label>:</td> 
+						<td>
+							<input id="lang" name="lang" type="text" value="" class="mceFocus" />
+						</td> 
+					</tr>
+					<tr>
+						<td class="label"><label id="xmllanglabel" for="xmllang">{#changelang_dlg.attribute_label_xmllangcode}</label>:</td> 
+						<td>
+							<input id="xml:lang" name="xml:lang" type="text" class="xmllang" value="" />
+						</td> 
+					</tr>
+					<tr>
+						<td class="label"><label id="xmllanglabel" for="xmllang">{#changelang_dlg.attribute_label_hreflangcode}</label>:</td> 
+						<td>
+							<input id="hreflang" name="hreflang" type="text" class="xmllang" value="" />
+						</td> 
+					</tr>
+					<tr id="class_row">
+						<td><label id="classlabel" for="classlist">{#class_name}</label></td>
+						<td>
+							<select id="classlist" name="classlist" class="mceEditableSelect">
+								<option value="">no option</option> 
+							</select>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</div>
+		
+	</div>
+	<div class="mceActionPanel">
+		<input type="submit" id="insert" name="insert" value="{#insert}" />
+		<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+	</div>
+</form>
+</body>
+</html>
