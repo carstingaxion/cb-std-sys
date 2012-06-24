@@ -12,11 +12,14 @@ if ( ( isset($_GET['activated'] ) && $pagenow == 'themes.php' )
 add_action('admin_init', 'cbstdsys_init' );
 
 function cbstdsys_delete_plugin_options() {
-	delete_option('cbstdsys_options');
+		delete_option('cbstdsys_options');
 }
 
 // Define default option settings
 function cbstdsys_add_defaults() {
+
+		global $wpdb;
+
 		$cbstdsys_defaults = array(	
 		// Contents
             "c_first_pub"             => ""
@@ -61,7 +64,7 @@ function cbstdsys_add_defaults() {
 		update_option('cbstdsys_options', $cbstdsys_defaults);
 		
 		
-		// set wp-defaults
+		// default configuration settings. See 'wp-admin/options.php' for more options.
     $o = array(
         'avatar_default' => 'blank',
         'avatar_rating' => 'G',
@@ -74,13 +77,32 @@ function cbstdsys_add_defaults() {
         'links_updated_date_format' => 'j. F Y, H:i',
         'permalink_structure' => '/%year%/%postname%/',
         'rss_language' => 'de',
-//        'timezone_string' => 'UTC+2',
+        'start_of_week' => 1,
+        'timezone_string' => 'Etc/GMT-1',
         'use_smilies' => 0,
+        'show_on_front'=> 'page',
+        'page_on_front'=> 2,
         'upload_url_path' =>  str_replace( array( 'http://www.', 'http://' ) , 'http://assets.', WP_SITEURL ),
     );
     foreach ( $o as $k => $v ) {
         update_option($k, $v);
-    }		
+    }
+
+    // Delete dummy post and comment.
+    wp_delete_post(1, TRUE);
+    wp_delete_comment(1);
+    
+		// Update the sample page on homepage
+		$sample_page = array();
+		$sample_page['ID'] = 2;
+    $sample_page['post_excerpt'] = 'Ein Testartikel mit allerlei interessanten Gestaltungselementen';
+		$sample_page['post_content'] = file_get_contents( dirname(__FILE__) . '/dummy-content-for-first-page.html');
+
+		// Update the page
+		wp_update_post( $sample_page );
+
+    // empty blogroll
+    $wpdb->query("DELETE FROM $wpdb->links WHERE link_id != ''");
     
 }
 
@@ -236,7 +258,7 @@ function cbstdsys_render_form() {
 								</td>
       				</tr>   
           
-      			  <tr valign="top" class="disabled">
+      			  <tr valign="top">
       					<th scope="row"><?php _e('Link-Listings','cb-std-sys'); ?></th>
       					<td>
       						<label><input name="cbstdsys_options[m_links]" type="checkbox" value="1" <?php if (isset($options['m_links'])) { checked('1', $options['m_links']); } ?> /> <?php _e('Use the WP Links feature','cb-std-sys'); ?></label><br />

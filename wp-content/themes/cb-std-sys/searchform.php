@@ -9,7 +9,7 @@ if ( cbstdsys_opts('m_search') ) {
         <input type="search" name="s" id="s<?php echo $id ?>" class="searchinput" value="<?php the_search_query(); ?>" required placeholder="<?php _e('Your search-phrase','cb-std-sys'); ?>">
 	      <input type="submit" value="<?php _e('Search'); ?>" id="searchsubmit<?php echo $id ?>" class=" button searchsubmit">
 </form>
-<?
+<?php
 		$GLOBALS['search_form_counter']++;
 }
 ?>

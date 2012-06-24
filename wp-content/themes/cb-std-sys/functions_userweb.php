@@ -3,6 +3,7 @@ if ( is_admin() ) {
 
 
 
+
 		
 } else {
 
@@ -45,11 +46,14 @@ if ( is_admin() ) {
 		if ( ! function_exists( 'cond_load_js_and_css' ) ) :
 				function cond_load_js_and_css($post){
 
+            global $current_user;
+            
 		        /**
 		         *  Construct corret URIs for use with 'BWP-Minify'-PLugin
 		         *
 		         *  @since  0.1.2
 		         */
+            $bwp_minify_plugins_url_addon = $bwp_minify_themes_url_addon 	= ''; 
 		        $bwp_opts = get_option('bwp_minify_general');
 		        if ( class_exists('BWP_MINIFY') && $bwp_opts['enable_auto'] == 'yes') {
 								$bwp_minify_plugins_url_addon = WP_CONTENT_URL;
@@ -132,7 +136,6 @@ if ( is_admin() ) {
 		          'quotecite'  	=> __( 'Source', 'cb-std-sys' )
 		        );
 
-
 						/**
 						 *  Auto resize textareas
 						 *
@@ -150,6 +153,16 @@ if ( is_admin() ) {
 						 $forms_css 		= $bwp_minify_themes_url_addon.'/css/forms.css';
 						 $comment_css  	= $bwp_minify_themes_url_addon.'/css/comments.css';
 
+
+						/**
+						 *  schema.org markup debug
+						 *
+						 *  @since  0.1.8
+						 *  @source https://github.com/KrofDrakula/microdata-tool
+						 */
+						$schema_org_debug_lib = $bwp_minify_themes_url_addon.'/js/libs/microdata-debug/jquery.microdata.js';
+						$schema_org_debug = $bwp_minify_themes_url_addon.'/js/libs/microdata-debug/schemas.js';
+						
 
 						// style.css - Default Styles
 						wp_enqueue_style( 'style-css', $bwp_minify_themes_url_addon.'/css/style.css', false, CB_STD_SYS_VERSION );
@@ -172,33 +185,29 @@ if ( is_admin() ) {
 
 				        wp_enqueue_script( 'std_script', $std_script_path, array('jquery'), CB_STD_SYS_VERSION,  true );
 				        wp_localize_script( 'std_script', 'std_script', $std_script_i18n );
-
-								if ( cbstdsys_opts( 'm_search' ) )
-										wp_enqueue_style( 'forms-css', $forms_css, false, CB_STD_SYS_VERSION );
 		        }
 
 
 						// Gallery
-						if ( is_singular() && conditionally_load_if_shortcode_used( '[gallery', $post ) && !empty($post) ) {
+						if ( conditionally_load_if_shortcode_used( '[gallery', $post ) && !empty($post) ) {
 
-		            wp_enqueue_script('jquery', $jquery, false, $jquery_ver, true);
+		            wp_enqueue_script( 'jquery', $jquery, false, $jquery_ver, true);
 
-		            wp_enqueue_script( 'fancybox', $fancybox, array('jquery'),$fancybox_ver,true);
-		            wp_enqueue_script( 'mousewheel', $mousewheel, array('fancybox'),$mousewheel_ver,true);
-		            wp_enqueue_script( 'easing', $easing, array('fancybox'),$easing_ver,true);
+#		            wp_enqueue_script( 'fancybox', $fancybox, array('jquery'),$fancybox_ver,true);
+#		            wp_enqueue_script( 'mousewheel', $mousewheel, array('fancybox'),$mousewheel_ver,true);
+#		            wp_enqueue_script( 'easing', $easing, array('fancybox'),$easing_ver,true);
 
-		            wp_enqueue_script( 'fancybox-caller', $fancybox_c, array('jquery','fancybox','easing','mousewheel'), CB_STD_SYS_VERSION,  true );
+#		            wp_enqueue_script( 'fancybox-caller', $fancybox_c, array('jquery','fancybox','easing','mousewheel'), CB_STD_SYS_VERSION,  true );
 
-		            wp_enqueue_style( 'fancybox-css', $fancycss, false, $fancycss_ver );
+#		            wp_enqueue_style( 'fancybox-css', $fancycss, false, $fancycss_ver );
 
 		            add_filter( 'wp_get_attachment_link', 'add_rel_attribute_to_attachment_link', 1, 2 );
 		        }
 
-
 						// Comments
 		        if ( class_exists('Social') ) {
-								if (  is_singular() && ( find_value_in_postobjects_array($post, comment_status, 'open')  || ( find_value_in_postobjects_array($post, comment_status, 'closed')  && !find_value_in_postobjects_array($post, comment_count, '0') ) ) && !empty($post)   ) {
-
+								if (  is_single() || ( is_page() && !defined('CBSTDSYS_DISABLE_PAGE_COMMENTS') ) && ( find_value_in_postobjects_array($post, comment_status, 'open')  || ( find_value_in_postobjects_array($post, comment_status, 'closed')  && !find_value_in_postobjects_array($post, comment_count, '0') ) ) && !empty($post)   ) {
+								#if( defined( 'CBSTDSYS_COMMENTS_USED' )  ) {
 										wp_enqueue_script('jquery', $jquery, false, $jquery_ver, true);
 
 				            wp_enqueue_script('mc_social_js', $mc_social_js, array('jquery'), Social::$version, true);
@@ -231,11 +240,38 @@ if ( is_admin() ) {
 
 		            wp_enqueue_style( 'forms-css', $forms_css, false, CB_STD_SYS_VERSION );
 						}
+						
+						
+						// Microdata schema.org Debug
+						if ( ( (defined( 'WP_LOCAL_DEV' ) && constant( 'WP_LOCAL_DEV' ) ) || constant( 'WP_DEBUG' ) ) && in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) ) {
+		            wp_enqueue_script('jquery', $jquery, false, $jquery_ver, true);
+		            wp_enqueue_script('schema_org_debug_lib', $schema_org_debug_lib, array('jquery'),false, true);
+		            wp_enqueue_script('schema_org_debug', $schema_org_debug, array('jquery','schema_org_debug_lib'),false, true);
+						}
 
 		        return $post;
 		    }
-				add_filter('the_posts', 'cond_load_js_and_css', 100); // the_posts gets triggered before wp_head
-		endif;
+
+				
+
+        /** 
+         *
+         *  Load all scripts and styles depending on the mainly queried posts
+         *  go only once through the array of $post objects         
+         *  
+         *  @since    0.1.8
+         */                                            
+        function main_query_script_and_style_loader( $query ) {
+            if ( $query->is_main_query() )
+        				add_filter( 'the_posts', 'cond_load_js_and_css', 100 ); // the_posts gets triggered before wp_head
+            else
+        				remove_filter( 'the_posts', 'cond_load_js_and_css', 100 ); // the_posts gets triggered before wp_head                
+        }
+        add_action( 'pre_get_posts', 'main_query_script_and_style_loader' );
+
+
+    endif;  // END : 	if ( ! function_exists( 'cond_load_js_and_css' ) ) 
+
 
 
 		/**
@@ -316,10 +352,11 @@ if ( is_admin() ) {
 		    <?php
 		      die();
 		    }
-		    if( $_SERVER['REQUEST_URI'] == '/humans.txt') {
-		        add_action('init','serve_humanstxt');
-		    }
 		endif;
+    if( $_SERVER['REQUEST_URI'] == '/humans.txt') {
+        add_action('init','serve_humanstxt');
+    }
+
 
 
 		/**
@@ -467,11 +504,11 @@ if ( is_admin() ) {
 										get_the_date('Y-m-d'),
 										get_the_date()
 									),
-
-									sprintf( '<span class="meta-sep">by</span> <address class="author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person"><a class="url fn n" href="%1$s" title="%2$s" itemprop="name url" rel="author">%3$s</a></address>',
+									sprintf( '<span class="meta-sep">%4$s</span> <address class="author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person"><a class="url fn n" href="%1$s" title="%2$s" itemprop="name url" rel="author">%3$s</a></address>',
 										get_author_posts_url( get_the_author_meta( 'ID' ) ),
 										sprintf( esc_attr__( 'View all posts by %s', 'cb-std-sys' ), get_the_author() ),
-										get_the_author()
+										get_the_author(),
+										__( 'by', 'cb-std-sys' )
 									)
 								);
 						} else {
@@ -544,7 +581,7 @@ if ( ! function_exists( 'thumbnail_setup' ) ) :
 				set_post_thumbnail_size( '100', '100', true );
 
 				// define all post_types, which use thumbnails
-				add_theme_support('post-thumbnails', array( 'post', 'page' ) );
+				add_theme_support('post-thumbnails' );
 
 				// define if standard sizes should be cropped
 				// http://wordpress.org/support/topic/force-crop-to-medium-size
@@ -604,41 +641,6 @@ function also_edit_custom_thumb_sizes( $sizes ){
 }
 add_filter( 'intermediate_image_sizes', 'also_edit_custom_thumb_sizes' );
 
-
-
-
-/**
- * Register Sidebars with widgetized areas
- *
- * @since   0.1.4
- * @source	Twenty Ten 1.0
- * @uses register_sidebar
- */
-if ( ! function_exists( 'cbstdsys_sidebars_init' ) ) :
-		function cbstdsys_sidebars_init() {
-		  $sidebars = array(
-		      array(__( 'Primary Widget Area', 'cb-std-sys' ),'primary-widget-area', __( 'The primary widget area', 'cb-std-sys' )),
-		      array(__( 'Secondary Widget Area', 'cb-std-sys' ),'secondary-widget-area', __( 'The secondary widget area', 'cb-std-sys' )),
-		      array(__( 'First Footer Widget Area', 'cb-std-sys' ),'first-footer-widget-area', __( 'The first footer widget area', 'cb-std-sys' )),
-		      array(__( 'Second Footer Widget Area', 'cb-std-sys' ),'second-footer-widget-area', __( 'The second footer widget area', 'cb-std-sys' )),
-		      array(__( 'Third Footer Widget Area', 'cb-std-sys' ),'third-footer-widget-area', __( 'The third footer widget area', 'cb-std-sys' )),
-		      array(__( 'Fourth Footer Widget Area', 'cb-std-sys' ),'fourth-footer-widget-area', __( 'The fourth footer widget area', 'cb-std-sys' )),
-		  );
-		  foreach ($sidebars as $sidebar) {
-			  	register_sidebar(array(
-			      'name'=> $sidebar[0],
-			      'id'  => $sidebar[1],
-			      'description' => $sidebar[2],
-			  		'before_widget' => '<article id="%1$s" class="widget %2$s"><div class="container">',
-			  		'after_widget' => '</div></article>',
-			  		'before_title' => '<h3>',
-			  		'after_title' => '</h3>'
-			  	));
-		  }
-
-		}
-		add_action( 'widgets_init', 'cbstdsys_sidebars_init' );
-endif;
 
 
 

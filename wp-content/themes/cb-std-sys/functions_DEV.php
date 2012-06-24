@@ -11,6 +11,12 @@ if ( is_admin() ) {
 		 *  @since  0.1.1
 		 *
 		 */
+
+// http://wordpress.org/extend/plugins/rename-media/screenshots/
+
+// http://wordpress.org/extend/plugins/media-file-renamer/screenshots/
+
+
 #http://wordpressapi.com/2012/01/11/change-uploaded-image-name-to-post-slug-during-upload-using-variables/
 		function rename_media_save( $post, $attachment ) {
 
@@ -108,126 +114,17 @@ wp_reset_query();
 
 
 
-function update_info_for_all_users() {
-    #if ( !in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) ) {
-				global $pagenow, $current_user;
-
-				$plugin_update_count = $theme_update_count = $wordpress_update_count = 0;
-
-				$update_plugins = get_site_transient( 'update_plugins' );
-				if ( ! empty( $update_plugins->response ) )
-					$plugin_update_count = count( $update_plugins->response );
-
-				#$update_themes = get_site_transient( 'update_themes' );
-				#if ( !empty($update_themes->response) )
-				#	$theme_update_count = count( $update_themes->response );
-
-				$update_wordpress = get_core_updates( array('dismissed' => false) );
-				if ( !empty($update_wordpress) && !in_array( $update_wordpress[0]->response, array('development', 'latest') ) && current_user_can('update_core') )
-					$wordpress_update_count = 1;
-
-				$total_update_count = $plugin_update_count + $theme_update_count + $wordpress_update_count;
-
-				if ( $pagenow == 'index.php' && $total_update_count >= 5 ) {
-				      $mailbody	= _x('Hello','Update-Info Mail Body', 'cb-std-sys')." Carsten"."\n".__( 'Could you do some updating for me soon? ', 'cb-std-sys' )."\n\n".__( 'Best Regards', 'cb-std-sys' )." ".$current_user->first_name." ".$current_user->last_name;
-				      echo '<div class="updated"><p>'.sprintf( __('Some components need an update. Contact %s, sure he will help you! ','cb-std-sys'), '<a href="mailto:Carsten Bach <'.get_option('admin_email').'>?subject='.$_SERVER['HTTP_HOST'].' '.__( 'needs some updates', 'cb-std-sys' ).'&body='.rawurlencode( $mailbody ).'">Carsten</a>').'</p></div>';
-				}
-		#}
-}
-add_action('admin_notices', 'update_info_for_all_users');
 
 
 
 
-// nice to show/hide all wanted metaboxes by default
-// http://wordpress.stackexchange.com/questions/15376/how-to-set-default-screen-options/19972#19972
 
-// add_action('user_register', 'set_user_metaboxes');
-#add_action('admin_init', 'set_user_metaboxes');
-function set_user_metaboxes($user_id=NULL) {
-
-    // These are the metakeys we will need to update
-    $meta_key['order'] = 'meta-box-order_post';
-    $meta_key['hidden'] = 'metaboxhidden_post';
-
-    // So this can be used without hooking into user_register
-    if ( ! $user_id)
-        $user_id = get_current_user_id();
-
-    // Set the default order if it has not been set yet
-    if ( ! get_user_meta( $user_id, $meta_key['order'], true) ) {
-        $meta_value = array(
-            'side' => 'submitdiv,formatdiv,categorydiv,postimagediv',
-            'normal' => 'postexcerpt,tagsdiv-post_tag,postcustom,commentstatusdiv,commentsdiv,trackbacksdiv,slugdiv,authordiv,revisionsdiv',
-            'advanced' => '',
-        );
-        update_user_meta( $user_id, $meta_key['order'], $meta_value );
-    }
-
-    // Set the default hiddens if it has not been set yet
-    if ( ! get_user_meta( $user_id, $meta_key['hidden'], true) ) {
-        $meta_value = array('postcustom','trackbacksdiv','commentstatusdiv','commentsdiv','slugdiv','authordiv','revisionsdiv');
-        update_user_meta( $user_id, $meta_key['hidden'], $meta_value );
-    }
-}
-
-
-function remove_unused_widgets(){
-  unregister_widget( 'WP_Widget_Calendar' );
-  unregister_widget( 'WP_Widget_Search' );
-  unregister_widget( 'WP_Widget_Recent_Comments' );
-	unregister_widget( 'WP_Widget_Pages' );
-	unregister_widget( 'WP_Widget_Categories' );
-	unregister_widget( 'WP_Widget_Archives' );
-	unregister_widget( 'WP_Widget_Meta' );
-	unregister_widget( 'WP_Widget_Links' );
-/*
-WP_Widget_Pages                   = Pages Widget
-WP_Widget_Calendar                = Calendar Widget
-WP_Widget_Archives                = Archives Widget
-WP_Widget_Links                   = Links Widget
-WP_Widget_Meta                    = Meta Widget
-WP_Widget_Search                  = Search Widget
-WP_Widget_Text                    = Text Widget
-WP_Widget_Categories              = Categories Widget
-WP_Widget_Recent_Posts            = Recent Posts Widget
-WP_Widget_Recent_Comments         = Recent Comments Widget
-WP_Widget_RSS                     = RSS Widget
-WP_Widget_Tag_Cloud               = Tag Cloud Widget
-WP_Nav_Menu_Widget                = Menus Widget
-*/
-
-}
-
-#add_action('widgets_init','remove_unused_widgets', 1);
-
-
-
-function custom_dashboard_help() {
-	echo '
-		<p>Need help? That "help" tab up top provides contextual help throughout the administrative panel. If you need additional support, you can contact your web team at <a href="http://www.cmurrayconsulting.com">C. Murray Consulting</a>:</p>
-		<p><strong>phone:</strong> 401.228.7660</p>
-		<p><strong>email:</strong> <a href="mailto:2010@cmurrayconsulting.com">2010@cmurrayconsulting.com</a><p>
-	';
-}
-/**
- * dort wo auch pf.de dazu kommt
- * 	wp_add_dashboard_widget('custom_help_widget', 'Help and Support', 'custom_dashboard_help'); // add a new custom widget for help and support
- */
 
 
 } else {
 
 
 
-
-function wplogin_filter( $url, $path, $orig_scheme )
-{
- $old  = array( "/(wp-login\.php)/");
- $new  = array( "redaktion");
- return preg_replace( $old, $new, $url, 1);
-}
-#add_filter('site_url',  'wplogin_filter', 10, 3);
 
 
 		/**
@@ -356,19 +253,6 @@ add_filter( 'post_gallery_output', 'filter_gallery_output', 1, 3 );
 
 
 
-// switch post formats in theme options, look   hook_backend    remove_post_custom_fields()
-
-/** geht nicht
-// "Einrichtung des mehrsprachigen Inhalts"
-      	remove_meta_box( 'icl_div' , 'post' , 'normal' );
-      	remove_meta_box( 'icl_div_config' , 'page' , 'normal' );
-**/
-
-
-
-
-
-
 
 
 
@@ -390,53 +274,37 @@ function roots_clean_style_tag($input) {
 
 
 
-// first and last classes for widgets
-// http://wordpress.org/support/topic/how-to-first-and-last-css-classes-for-sidebar-widgets
-function roots_widget_first_last_classes($params) {
-  global $my_widget_num;
-  $this_id = $params[0]['id'];
-  $arr_registered_widgets = wp_get_sidebars_widgets();
 
-  if (!$my_widget_num) {
-    $my_widget_num = array();
-  }
 
-  if (!isset($arr_registered_widgets[$this_id]) || !is_array($arr_registered_widgets[$this_id])) {
-    return $params;
-  }
 
-  if (isset($my_widget_num[$this_id])) {
-    $my_widget_num[$this_id] ++;
-  } else {
-    $my_widget_num[$this_id] = 1;
-  }
 
-  $class = 'class="widget-' . $my_widget_num[$this_id] . ' ';
 
-  if ($my_widget_num[$this_id] == 1) {
-    $class .= 'widget-first ';
-  } elseif ($my_widget_num[$this_id] == count($arr_registered_widgets[$this_id])) {
-    $class .= 'widget-last ';
-  }
 
-  $params[0]['before_widget'] = str_replace('class="', $class, $params[0]['before_widget']);
 
-  return $params;
 
+// http://gandamanurung.com/wordpress-trick/remove-empty-span-tag-on-wordpress-caused-by-read-more-link/
+// removes empty span
+function remove_empty_read_more_span($content) {
+	return eregi_replace("(<p><span id=\"more-[0-9]{1,}\"></span></p>)", "", $content);
 }
-#add_filter('dynamic_sidebar_params', 'roots_widget_first_last_classes');
+add_filter('the_content', 'remove_empty_read_more_span');
 
 
-# http://code.google.com/p/wp-basis-theme/source/browse/trunk/basis-html5/functions.php
-// we don't need to self-close these tags in html5:
-// <img>, <input>
-function roots_remove_self_closing_tags($input) {
-  return str_replace(' />', '>', $input);
+
+
+// http://codex.wordpress.org/Customizing_the_Read_More#Link_Jumps_to_More_or_Top_of_Page
+// removes url hash to avoid the jump link
+function remove_more_jump_link($link) {
+   $offset = strpos($link, '#more-');
+   if ($offset) {
+      $end = strpos($link, '"',$offset);
+   }
+   if ($end) {
+      $link = substr_replace($link, '', $offset, $end-$offset);
+   }
+   return $link;
 }
-
-#add_filter('get_avatar', 'roots_remove_self_closing_tags');
-#add_filter('comment_id_fields', 'roots_remove_self_closing_tags');
-#add_filter('post_thumbnail_html', 'roots_remove_self_closing_tags');
+add_filter('the_content_more_link', 'remove_more_jump_link');
 
 
 

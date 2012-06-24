@@ -10,6 +10,16 @@
 get_header(); ?>
 
 <?php
+      /**
+       *  Add action here to insert markup after the header.php is loaded
+       *  
+       *  @since    0.2.1
+       */                                     
+        
+      do_action( 'cbstdsys_after_get_header' ); 
+?>
+
+<?php
 	/* Queue the first post, that way we know who
 	 * the author is when we try to get their name,
 	 * URL, description, avatar, etc.
@@ -36,6 +46,16 @@ get_header(); ?>
 	 * we can run the loop properly, in full.
 	 */
 	rewind_posts();
+
+
+  /**
+   *  Add action here to insert markup before the loop starts
+   *  
+   *  @since    0.2.1
+   */                                     
+    
+  do_action( 'cbstdsys_before_loop' ); 
+
 
 	/* Run the loop for the author archive page to output the authors posts
 	 * If you want to overload this in a child theme then include a file

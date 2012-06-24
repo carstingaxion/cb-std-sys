@@ -1,12 +1,4 @@
 <?php
- 
- // @todo manually set this in style.css
-define('CB_STD_SYS_VERSION','0.1.8');
-
-
-if(!defined('WP_THEME_URL')) {
-  define( 'WP_THEME_URL', get_stylesheet_directory_uri() );
-}
 /**
  *  Changelog
  *

@@ -46,7 +46,7 @@ if ( !$the_query->have_posts() ) {
     $the_query = new WP_Query( $args );
 }
 if ( $the_query->have_posts() ) {
-		echo "<h2>". __( 'Try something of this.', 'cb-std-sys' ) ."</h2>";
+		echo "<h2>". __( 'Read on', 'cb-std-sys' ) ."</h2>";
 		echo '<ul class="postlisting">';
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 			echo '         <li><a href="'.get_permalink($post->ID).'" title="'. sprintf( esc_attr__( 'Permalink to %s', 'cb-std-sys' ), the_title_attribute( 'echo=0' ) ).'" rel="bookmark">'.get_the_title().'</a></li>';

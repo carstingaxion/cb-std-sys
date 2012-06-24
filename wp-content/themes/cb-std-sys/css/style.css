@@ -31,7 +31,6 @@ table { border-collapse: collapse; border-spacing: 0; }
 hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
 input, select { vertical-align: middle; }
 
-body { font:13px/1.231 sans-serif; *font-size:small; }
 select, input, textarea, button { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
@@ -39,7 +38,7 @@ html, body {height: 100%;}
 html { overflow-y: scroll; }
 
 a:hover, a:active { outline: none; }
-a:active, input[type=submit]:active{ outline: 0; position: relative; top: 1px; }
+/*a:active, input[type=submit]:active{ outline: 0; position: relative; top: 1px; }*/
 #content .entry-content a[href^="http"]:before { content: "→ "; }
 #content .entry-content a[href^="http"]:hover:after, #content .entry-content a[href^="http"]:focus:after{ content:" (extern)";}
 #content .entry-content a[href^="http://assets"]:before { content: ""; }
@@ -56,14 +55,14 @@ sub, sup { font-size: 75%; line-height: 0; position: relative; }
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 
-pre { white-space: pre; white-space: pre-wrap; white-space: pre-line; word-wrap: break-word; padding: 15px; }
+pre { white-space: pre; white-space: pre-wrap;word-wrap: break-word; padding: 15px; }
 textarea { overflow: auto; } 
 .ie6 legend, .ie7 legend { margin-left: -7px; } 
 input[type="radio"] { vertical-align: text-bottom; }
 input[type="checkbox"] { vertical-align: bottom; }
 .ie7 input[type="checkbox"] { vertical-align: baseline; }
 .ie6 input { vertical-align: text-bottom; }
-label, input[type="button"], input[type="submit"], input[type="image"], button, .button { cursor: pointer; }
+label, input[type="button"], input[type="submit"], input[type="image"], button, .button, .page-numbers { cursor: pointer; }
 button, input, select, textarea { margin: 0; }
 /*
 input:valid, textarea:valid   { border-color:#6c9; }
@@ -84,6 +83,10 @@ button::-moz-focus-inner { padding:0; border:0; }
 
 
 /* =========================  GENERIC PSEUDOS to choose via TINYMCE (copy from eitor-style.css) ========================= */
+/**
+ *	MOVED TO tiny-content-elements.css in childtheme
+ *
+ *
 .highlight, .comment-awaiting-moderation { color:#c30; }
 .dimmed { color:#888; }
 .info, .memo, .important, .error, .wpcf7-not-valid-tip, .wpcf7-validation-errors,
@@ -94,7 +97,7 @@ button::-moz-focus-inner { padding:0; border:0; }
 .error, .wpcf7-not-valid-tip, .wpcf7-validation-errors, .wpcf7-spam-blocked, .wpcf7-not-valid-tip-no-ajax
 {background:#fee; color:#400; border:2px #844 solid; }
 .highlight *, .dimmed *, .info *, .memo *, .important *{  background-color: transparent!important;}
-
+*/
 
 /* =========================  COLOURS  ========================= */
 ::-moz-selection{ background: #FF5E99; color:#fff; }
@@ -133,16 +136,22 @@ table,
 figure {
   max-width: 100%;
 }
-
+/**
+ *	MOVED TO tiny-content-elements.css in childtheme
+ *
+ *
 #content blockquote,
 #content q,
 #content cite{
     font-style: italic;
     margin:.5em 2em;
 }
+*/
 
-#fancybox-wrap *{ max-width:100%;}
-
+/**
+ *	MOVED TO tiny-content-elements.css in childtheme
+ *
+ *
 a[href$=".pdf"]{
     background:transparent url("../img/pdf.gif") no-repeat 10px 50%;
     text-decoration: none;
@@ -155,7 +164,7 @@ a[href$=".pdf"]:active{
     text-decoration: underline;
     outline:1px solid #659594;
 }
-
+*/
 
 /* =========================FOOTER========================= */
 footer {
@@ -166,7 +175,10 @@ footer {
 
 
 /* =========================  USEFUL ELEMENTS  ========================= */
-button, .button, input[type="submit"] {
+button,
+.button,
+input[type="submit"],
+.page-numbers {
 		display: inline-block;
 	  -moz-border-radius: 5px;
 	  -webkit-border-radius: 5px;
@@ -174,7 +186,7 @@ button, .button, input[type="submit"] {
 		border:1px solid;
 		margin:0 0.5em 0.5em 0;
 		padding:.15em .3em;
-		background:url("/wp-content/themes/cb-std-sys/img/social/sprite-y-24.png") no-repeat scroll 0 -100px #DEDEDE;
+		background:url('../img/social/sprite-y-24.png') no-repeat scroll 0 -100px #DEDEDE;
 		outline:none!important;
 }
 
@@ -245,10 +257,7 @@ nav.pagination a[rel="next"]{ float:right;}
 
 
 /* =========================WORDPRESS DEFAULT CLASSES========================= */
-.aligncenter { display:block; margin:0 auto }
-.alignleft { float:left }
-.alignright { float:right }
-.bypostauthor{font-weight: 700;}
+.bypostauthor>div.social-comment-inner{font-weight: 700;}
 .sticky{}
 a.readmore{display:inline!important;}
 a.editlink{display:inline!important;width:auto!important;height:auto!important;font-size:90%;}
@@ -261,10 +270,7 @@ a.editlink{display:inline!important;width:auto!important;height:auto!important;f
     padding: 0;
     text-align: center;
 }
-.gallery a.fb-gal{
-    background:none!important;
-    padding:0!important;
-}
+
 #fancybox-overlay {
     background-color: #000!important;
     opacity:0.9!important;
@@ -277,14 +283,20 @@ a.editlink{display:inline!important;width:auto!important;height:auto!important;f
     color:#fff!important;
     box-shadow: 5px 5px 10px #000000, -5px -5px 10px #000;
 }
+#fancybox-wrap *{ max-width:100%;}
 #fancybox-outer {background: none!important;}
 #fancybox-content {
     border-color:none!important;
     border-color: rgba(0, 0, 0, 0.1)!important;
 }
+/**
+ *	MOVED TO tiny-content-elements.css in childtheme
+ *
+ *
 .wp-caption { border:1px solid #666; text-align:center; background:#ccc; padding:10px; margin:10px }
 .wp-caption-text{}
 .gallery-caption{}
+*/
 /* =========================CSS3 MEDIA QUERIES========================= */
 @media all and (orientation:portrait) {
 

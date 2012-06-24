@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cb-std-sys\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-27 02:21+0100\n"
+"POT-Creation-Date: 2012-02-27 03:09+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carsten Bach <mail@carsten-bach.de>\n"
 "Language-Team: Carsten Bach | Mediengestaltung <mail@carsten-bach.de>\n"
@@ -48,7 +48,7 @@ msgstr "Jahres-Archiv: %s"
 # <?php endif; ?>
 #: ../archive.php:37
 msgid "Blog Archives"
-msgstr "Blog-Archive"
+msgstr "Blog-Archiv"
 
 # <?php if ( ! empty( $post->post_parent ) ) : ?>
 # <p class="page-title"><a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', 'cb-std-sys' ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery"><?php
@@ -159,14 +159,14 @@ msgstr "Sorry, dein Browser ist leider viel zu alt, um alle Features dieser Webs
 # register_nav_menus( array(
 # 'primary' => __( 'Main Navigation', 'cb-std-sys' ),
 # 'utility' => __( 'Utility Navigation', 'cb-std-sys' ),
-#: ../functions.php:46
+#: ../functions.php:48
 msgid "Main Navigation"
 msgstr "Hauptnavigation"
 
 # 'primary' => __( 'Main Navigation', 'cb-std-sys' ),
 # 'utility' => __( 'Utility Navigation', 'cb-std-sys' ),
 # ) );
-#: ../functions.php:47
+#: ../functions.php:49
 msgid "Utility Navigation"
 msgstr "Zusatz Navigation"
 
@@ -245,6 +245,18 @@ msgstr "'%s' weiterlesen"
 # <?php printf( __( '<span class="%1$s">Posted in</span> %2$s', 'cb-std-sys' ), 'entry-utility-prep entry-utility-prep-cat-links', get_the_category_list( ', ' ) ); ?>
 # </span>
 #: ../functions_userweb.php:462
+#, php-format
+msgid "<span class=\"%1$s\">Posted on</span> %2$s %3$s"
+msgstr "<span class=\"%1$s\">Veröffentlicht am</span> %2$s %3$s"
+
+#: ../functions_userweb.php:474
+msgid "by"
+msgstr "von"
+
+# <span class="cat-links">
+# <?php printf( __( '<span class="%1$s">Posted in</span> %2$s', 'cb-std-sys' ), 'entry-utility-prep entry-utility-prep-cat-links', get_the_category_list( ', ' ) ); ?>
+# </span>
+#: ../functions_userweb.php:478
 #, php-format
 msgid "<span class=\"%1$s\">Posted on</span> %2$s"
 msgstr "<span class=\"%1$s\">Veröffentlicht am</span> %2$s"
@@ -541,17 +553,17 @@ msgstr "% Antworten"
 # printf( __( 'Tag Archives: %s', 'cb-std-sys' ), '' . single_tag_title( '', false ) . '' );
 # } elseif ( is_day() ) {
 #: ../tag.php:14
-#: ../inc/hook_frontend.php:886
+#: ../inc/hook_frontend.php:887
 #, php-format
 msgid "Tag Archives: %s"
-msgstr "Schlagwort-Archive: %s"
+msgstr "Schlagwort-Archiv: %s"
 
 # <?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'cb-std-sys' ) ); ?>
 # <?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'cb-std-sys' ), 'after' => '</div>' ) ); ?>
 #
 #: ../HTML4/onecolumn-page.php:21
 #: ../HTML4/___attachment.php:89
-#: ../inc/hook_frontend.php:1152
+#: ../inc/hook_frontend.php:1153
 msgid "Pages:"
 msgstr "Seiten:"
 
@@ -1055,53 +1067,53 @@ msgstr "Autor"
 # return $copyright." ".get_bloginfo("name").". ".__('All rights reserved', 'cb-std-sys').".";
 # }
 #
-#: ../inc/hook_frontend.php:232
+#: ../inc/hook_frontend.php:233
 msgid "All rights reserved"
 msgstr "Alle Rechte vorbehalten"
 
 # $pagination['prev_text'] = '<span class="meta-nav">&larr;</span> '. __( 'Previous posts', 'cb-std-sys' );
 # } elseif ( is_archive() ) {
 # $pagination['next_text'] = __( 'Older posts', 'cb-std-sys' ).' <span class="meta-nav">&rarr;</span>';
-#: ../inc/hook_frontend.php:762
-#: ../inc/hook_frontend.php:765
-#: ../inc/hook_frontend.php:777
+#: ../inc/hook_frontend.php:763
+#: ../inc/hook_frontend.php:766
+#: ../inc/hook_frontend.php:778
 msgid "Older posts"
 msgstr "Ältere Beiträge"
 
 # $pagination['next_text'] = __( 'Next posts', 'cb-std-sys' ).' <span class="meta-nav">&rarr;</span>';
 # $pagination['prev_text'] = '<span class="meta-nav">&larr;</span> '. __( 'Previous posts', 'cb-std-sys' );
 # } elseif ( is_archive() ) {
-#: ../inc/hook_frontend.php:763
-#: ../inc/hook_frontend.php:766
-#: ../inc/hook_frontend.php:778
+#: ../inc/hook_frontend.php:764
+#: ../inc/hook_frontend.php:767
+#: ../inc/hook_frontend.php:779
 msgid "Newer posts"
 msgstr "Neuere Beiträge"
 
 # <div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'cb-std-sys' ) ); ?></div>
 # <div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'cb-std-sys' ) ); ?></div>
 # </nav> <!-- .navigation -->
-#: ../inc/hook_frontend.php:770
+#: ../inc/hook_frontend.php:771
 msgid "&larr;"
 msgstr "&larr;"
 
 # <div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'cb-std-sys' ) ); ?></div>
 # <div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'cb-std-sys' ) ); ?></div>
 # </nav> <!-- .navigation -->
-#: ../inc/hook_frontend.php:774
+#: ../inc/hook_frontend.php:775
 msgid "&rarr;"
 msgstr "&rarr;"
 
 # <?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'cb-std-sys' ) ); ?>
 # <?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'cb-std-sys' ), 'after' => '</div>' ) ); ?>
 #
-#: ../inc/hook_frontend.php:782
+#: ../inc/hook_frontend.php:783
 msgid "page"
 msgstr "Seiten:"
 
 #
 #
 #
-#: ../inc/hook_frontend.php:975
+#: ../inc/hook_frontend.php:976
 #, php-format
 msgid "Search results for %s"
 msgstr "Suchergebnisse für: %s"
@@ -1109,13 +1121,13 @@ msgstr "Suchergebnisse für: %s"
 # <div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'cb-std-sys' ) ); ?></div>
 # <div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'cb-std-sys' ) ); ?></div>
 # </nav> <!-- .navigation -->
-#: ../inc/hook_frontend.php:977
-#: ../inc/hook_frontend.php:1003
+#: ../inc/hook_frontend.php:978
+#: ../inc/hook_frontend.php:1004
 #, php-format
 msgid "Page %s"
 msgstr "Seite %s"
 
-#: ../inc/hook_frontend.php:1041
+#: ../inc/hook_frontend.php:1042
 #, php-format
 msgid "View Website of %s"
 msgstr "Zeige die Webseite von %s"
@@ -1123,13 +1135,13 @@ msgstr "Zeige die Webseite von %s"
 # <?php
 # printf(__('<span class="%1$s">By</span> %2$s', 'cb-std-sys'),
 # 'meta-prep meta-prep-author',
-#: ../inc/hook_frontend.php:1046
+#: ../inc/hook_frontend.php:1047
 #, php-format
 msgid "View all posts by %s"
 msgstr "Zeige alle Beiträge von %s"
 
-#: ../inc/hook_frontend.php:1068
 #: ../inc/hook_frontend.php:1069
+#: ../inc/hook_frontend.php:1070
 #, php-format
 msgid "User Avatar of %s"
 msgstr "Benutzer-Bild von %s"
@@ -1137,7 +1149,7 @@ msgstr "Benutzer-Bild von %s"
 # <a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">&copy; <?php echo cb_std_sys_copyright();?></a>
 # <a href="<?php echo $_SERVER['REQUEST_URI']; ?>#top"  class="visuallyhidden focusable" title="<?php _e('back to top','cb-std-sys')?>"><?php _e('back to top','cb-std-sys')?></a>
 # </div>
-#: ../inc/hook_frontend.php:1134
+#: ../inc/hook_frontend.php:1135
 msgid "back to top"
 msgstr "nach oben"
 

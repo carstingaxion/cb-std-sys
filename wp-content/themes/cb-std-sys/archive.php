@@ -15,6 +15,16 @@
 get_header(); ?>
 
 <?php
+      /**
+       *  Add action here to insert markup after the header.php is loaded
+       *  
+       *  @since    0.2.1
+       */                                     
+        
+      do_action( 'cbstdsys_after_get_header' ); 
+?>
+
+<?php
 	/* Queue the first post, that way we know
 	 * what date we're dealing with (if that is the case).
 	 *
@@ -27,6 +37,7 @@ get_header(); ?>
 
 		<header>
 			<h1 class="page-title">
+<?php echo get_post_type(); ?>
 <?php if ( is_day() ) : ?>
 				<?php printf( __( 'Daily Archives: %s', 'cb-std-sys' ), '<strong>' . get_the_date() . '</strong>' ); ?>
 <?php elseif ( is_month() ) : ?>
@@ -45,6 +56,16 @@ get_header(); ?>
 	 * we can run the loop properly, in full.
 	 */
 	rewind_posts();
+
+
+  /**
+   *  Add action here to insert markup before the loop starts
+   *  
+   *  @since    0.2.1
+   */                                     
+    
+  do_action( 'cbstdsys_before_loop' ); 
+
 
 	/* Run the loop for the archives page to output the posts.
 	 * If you want to overload this in a child theme then include a file

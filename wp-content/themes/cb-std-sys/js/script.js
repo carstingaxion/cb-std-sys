@@ -63,6 +63,8 @@ jQuery(document).ready(function($) {
 		 $('#post_to').insertAfter($('.social-psst'));
 		 // precheck this for sharing our webcontent
 		 $('#post_to_service').attr('checked',true);
+		 
+		 $('#cancel-comment-reply-link').addClass('button');
 
 		 // reload page after successful login trough
 		 // facebook or twitter via 'Mailchimp-SOCIAL'-Plugin

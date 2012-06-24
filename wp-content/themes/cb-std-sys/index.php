@@ -13,12 +13,27 @@
  * @since 0.0.1
  */
 
-get_header(); 
+  get_header(); 
 
-get_template_part( 'loop', 'index' );
+  /**
+   *  Add action here to insert markup after the header.php is loaded
+   *  
+   *  @since    0.2.1
+   */                                     
+  do_action( 'cbstdsys_after_get_header' ); 
 
-get_sidebar(); 
 
-get_footer(); 
+  /**
+   *  Add action here to insert markup before the loop starts
+   *  
+   *  @since    0.2.1
+   */                                     
+  do_action( 'cbstdsys_before_loop' ); 
+  
+  get_template_part( 'loop', 'index' );
+  
+  get_sidebar(); 
+  
+  get_footer(); 
 
 ?>

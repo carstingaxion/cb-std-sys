@@ -1,9 +1,35 @@
+<?php
+/**
+ * @package WordPress
+ * @subpackage cb-std-sys
+ * @since cb-std-sys 0.0.8
+ */
 <?php get_header(); ?>
+
+<?php
+      /**
+       *  Add action here to insert markup after the header.php is loaded
+       *  
+       *  @since    0.2.1
+       */                                     
+        
+      do_action( 'cbstdsys_after_get_header' ); 
+?>
+
+<?php
+  /**
+   *  Add action here to insert markup before the loop starts
+   *  
+   *  @since    0.2.1
+   */                                     
+    
+  do_action( 'cbstdsys_before_loop' ); 
+?>  
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/Article">
 				
-					</header>
+					<header>
 						<?php if ( is_front_page() || is_home() ) { ?>
 							<h2 class="entry-title" itemprop="name"><?php the_title(); ?></h2>
 						<?php } else { ?>

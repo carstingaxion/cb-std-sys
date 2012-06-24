@@ -4,7 +4,7 @@
  * Copyright (C) 2010 Joe Dotoff
  * http://www.w3theme.com/jquery-bbedit/
  *
- * Version 1.1
+ * Version 1.4
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -33,38 +33,40 @@ jQuery(document).ready(function ($) {
     var ta = data.ta;
     var range = data.range;
     var text = '';
-    if (range != null) {
+    if (range !== null) {
       text = range.text;
     } else if (typeof ta.selectionStart != 'undefined') {
       startPos = ta.selectionStart;
       endPos = ta.selectionEnd;
       text = ta.value.substring(startPos, endPos);
     }
-    if (typeof tag == 'function' || typeof tag == 'object') {
+    if (typeof tag === 'function' || typeof tag === 'object') {
       val = tag(text);
       if (val === false) {
-        if (range != null) {
+        if (range !== null) {
           range.moveStart('character', text.length);
           range.select();
-        } else if (typeof ta.selectionStart != 'undefined') {
+        } else if (typeof ta.selectionStart !== 'undefined') {
           ta.selectionStart = startPos + text.length;
         }
         ta.focus();
         return;
       }
     } else {
-      if (!tag2 || tag2 == '') {
+      if (!tag2 || tag2 === '') {
         val = text + tag;
       } else {
         val = tag + text + tag2;
       }
     }
-    if (range != null) {
+    if (range !== null) {
       range.text = val;
       if (data.highlight) {
         range.moveStart('character', -val.length);
+        //range.moveEnd('character', 0);
       } else {
         range.moveStart('character', 0);
+        //range.moveEnd('character', 0);
       }
       range.select();
     } else if (typeof ta.selectionStart != 'undefined') {
@@ -95,45 +97,57 @@ jQuery(document).ready(function ($) {
 
       var toolHtml = '<div class="qtag-toolbar">';
       for (var i in tags) {
-        toolHtml += '<button type="button" class="qtag-' + tags[i] + '" title="' + $.qtag.i18n[settings.lang][tags[i]] + '">' + $.qtag.i18n[settings.lang][tags[i]] + '</button> ';
+        toolHtml += '<button type="button" class="button-secondary qtag-' + tags[i] + '" title="' + $.qtag.i18n[settings.lang][tags[i]] + '">' + $.qtag.i18n[settings.lang][tags[i]] + '</button> ';
       }
       toolHtml += '</div>';
 
       return this.each(function () {
+
         var data = settings;
+//        var container = $('<div class="qtags-container"></div>');
+//        container.append($(this).clone());
+//console.log($(this));
+//console.log(container);
+//        $(this).replaceWith(container);
+//console.log($(this));
+//console.log(container);
         data.range = null;
-        data.ta = this;
-        $(this).bind("select click keyup", function () {
+
+//        var ta = data.ta = container.children("textarea")[0];
+        var ta = data.ta = $(this);
+
+        //container.width($(ta).attr("offsetWidth"));
+        $(ta).bind("select click keyup", function() {
           if (document.selection) {
             data.range = document.selection.createRange();
           }
         });
           var toolbar = $(toolHtml);
-          $(this).before(toolbar);
-          if ($.browser.msie && parseInt($.browser.version) <= 6) {
-            toolbar.children("span").mouseover(function () {
-              $(this).addClass("hover");
-            }).mouseout(function () {
-              $(this).removeClass("hover");
-            });
-          }
-          toolbar.find(".qtag-strong").click(function () {
-            insertTag(data, '<strong>', '</strong>');
+          $(ta).before(toolbar);
+
+					toolbar.find(".qtag-strong").click(function () {
+						// make it work with multiple textareas, e.g. on the /wp-admin/widgets.php
+	       		data.ta = $(this).parent().next()[0];
+						insertTag(data, '<strong>', '</strong>');
           });
           toolbar.find(".qtag-em").click(function () {
-            insertTag(data, '<em>', '</em>');
-          });
-          toolbar.find(".qtag-u").click(function () {
-            insertTag(data, '<u>', '</u>');
+							// make it work with multiple textareas, e.g. on the /wp-admin/widgets.php
+		       		data.ta = $(this).parent().next()[0];
+							insertTag(data, '<em>', '</em>');
           });
           toolbar.find(".qtag-s").click(function () {
-            insertTag(data, '<s>', '</s>');
+							// make it work with multiple textareas, e.g. on the /wp-admin/widgets.php
+		       		data.ta = $(this).parent().next()[0];
+	            insertTag(data, '<del>', '</del>');
           });
           toolbar.find(".qtag-code").click(function () {
-            insertTag(data, '<code>', '</code>');
+							// make it work with multiple textareas, e.g. on the /wp-admin/widgets.php
+		       		data.ta = $(this).parent().next()[0];
+							insertTag(data, '<code>', '</code>');
           });
           toolbar.find(".qtag-quote").click(function () {
-            //insertTag(data, '<blockquote>', '</blockquote>');
+							// make it work with multiple textareas, e.g. on the /wp-admin/widgets.php
+		       		data.ta = $(this).parent().next()[0];
 	            insertTag(data, function (text) {
 	                var cite = prompt(jq_qtags.quotecite+': ', '');
 	                if (cite != null && cite != '') {
@@ -147,7 +161,9 @@ jQuery(document).ready(function ($) {
 	            });
           });
           toolbar.find(".qtag-url").click(function () {
-	            insertTag(data, function (text) {
+							// make it work with multiple textareas, e.g. on the /wp-admin/widgets.php
+		       		data.ta = $(this).parent().next()[0];
+							insertTag(data, function (text) {
 	                var url = prompt(jq_qtags.urlhref+': ', '');
 	                if (url != null && url != '') {
 	                  if (text == '') {
@@ -165,6 +181,6 @@ jQuery(document).ready(function ($) {
 });
 
 jQuery(document).ready(function ($) {
-		$('.allowed-comment-tags').remove();
-	  $("#comment").qtag();
+		$('.allowed-comment-tags').hide();
+	  $('#comment, body.wp-admin textarea[name^="widget-text"]').qtag();
 });
