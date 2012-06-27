@@ -6,13 +6,13 @@
 <!--[if IE 7 ]>    <html class="ie ie7 no-js" dir="ltr" lang="<?php echo ICL_LANGUAGE_CODE; ?>"<?php echo $fbml; ?>> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie ie8 no-js" dir="ltr" lang="<?php echo ICL_LANGUAGE_CODE; ?>"<?php echo $fbml; ?>> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie ie9 no-js" dir="ltr" lang="<?php echo ICL_LANGUAGE_CODE; ?>"<?php echo $fbml; ?>> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html dir="ltr" lang="<?php echo ICL_LANGUAGE_CODE; ?>"<?php echo $fbml; ?> class="no-js"> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="ltr" lang="<?php echo ICL_LANGUAGE_CODE; ?>"<?php echo $fbml; ?> class="gte-ie9 no-js"> <!--<![endif]-->
 <?php } else { ?>
 <!--[if lt IE 7 ]> <html class="ie ie6 no-js" <?php language_attributes(); echo $fbml; ?>> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie ie7 no-js" <?php language_attributes(); echo $fbml; ?>> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie ie8 no-js" <?php language_attributes(); echo $fbml; ?>> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie ie9 no-js" <?php language_attributes(); echo $fbml; ?>> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html <?php  language_attributes(); echo $fbml; ?> class="no-js"> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html <?php  language_attributes(); echo $fbml; ?> class="gte-ie9 no-js"> <!--<![endif]-->
 <?php } ?>
 <head>
 	<meta charset="utf-8">
