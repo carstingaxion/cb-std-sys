@@ -4,7 +4,7 @@
  * @subpackage cb-std-sys
  * @since cb-std-sys 0.0.8
  */
-<?php get_header(); ?>
+get_header(); ?>
 
 <?php
       /**
