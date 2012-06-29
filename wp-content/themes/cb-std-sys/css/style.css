@@ -38,7 +38,7 @@ html, body {height: 100%;}
 html { overflow-y: scroll; }
 
 a:hover, a:active { outline: none; }
-/*a:active, input[type=submit]:active{ outline: 0; position: relative; top: 1px; }*/
+a:active, input[type=submit]:active{ outline: 0; position: relative; top: 1px; }
 #content .entry-content a[href^="http"]:before { content: "→ "; }
 #content .entry-content a[href^="http"]:hover:after, #content .entry-content a[href^="http"]:focus:after{ content:" (extern)";}
 #content .entry-content a[href^="http://assets"]:before { content: ""; }
@@ -64,11 +64,11 @@ input[type="checkbox"] { vertical-align: bottom; }
 .ie6 input { vertical-align: text-bottom; }
 label, input[type="button"], input[type="submit"], input[type="image"], button, .button, .page-numbers { cursor: pointer; }
 button, input, select, textarea { margin: 0; }
-/*
+
 input:valid, textarea:valid   { border-color:#6c9; }
 input:invalid, textarea:invalid { border-color:#f00; }
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
-*/
+
 ::-moz-selection{ text-shadow: none; }
 ::selection { text-shadow: none; }
 button {  width: auto; overflow: visible; }
@@ -83,10 +83,6 @@ button::-moz-focus-inner { padding:0; border:0; }
 
 
 /* =========================  GENERIC PSEUDOS to choose via TINYMCE (copy from eitor-style.css) ========================= */
-/**
- *	MOVED TO tiny-content-elements.css in childtheme
- *
- *
 .highlight, .comment-awaiting-moderation { color:#c30; }
 .dimmed { color:#888; }
 .info, .memo, .important, .error, .wpcf7-not-valid-tip, .wpcf7-validation-errors,
@@ -97,7 +93,7 @@ button::-moz-focus-inner { padding:0; border:0; }
 .error, .wpcf7-not-valid-tip, .wpcf7-validation-errors, .wpcf7-spam-blocked, .wpcf7-not-valid-tip-no-ajax
 {background:#fee; color:#400; border:2px #844 solid; }
 .highlight *, .dimmed *, .info *, .memo *, .important *{  background-color: transparent!important;}
-*/
+
 
 /* =========================  COLOURS  ========================= */
 ::-moz-selection{ background: #FF5E99; color:#fff; }
@@ -126,7 +122,6 @@ p { line-height:1.5em; margin:0 0 1em 0; }
 .amp {font:italic 1.25em/1em "Goudy Old Style",Baskerville,"Palatino Linotype",Palatino,Constantia,Georgia,'Book Antiqua','Times New Roman',serif;position: relative;top:.1em;}
 
 /* =========================MAIN CONTENT========================= */
-/*** iframe Inhalte wie Videos oder Karten skalieren **/
 img,
 embed,
 object,
@@ -136,17 +131,14 @@ table,
 figure {
   max-width: 100%;
 }
-/**
- *	MOVED TO tiny-content-elements.css in childtheme
- *
- *
+
 #content blockquote,
 #content q,
 #content cite{
     font-style: italic;
     margin:.5em 2em;
 }
-*/
+
 
 /**
  *	MOVED TO tiny-content-elements.css in childtheme
@@ -203,14 +195,14 @@ input[type="search"] {
 input[type="search"]::-webkit-input-placeholder {
         color: inherit;
 }
-/*
+
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
-*/
+
 
 /* =========================WORDPRESS PAGINATION========================= */
 nav.pagination {
@@ -289,14 +281,11 @@ a.editlink{display:inline!important;width:auto!important;height:auto!important;f
     border-color:none!important;
     border-color: rgba(0, 0, 0, 0.1)!important;
 }
-/**
- *	MOVED TO tiny-content-elements.css in childtheme
- *
- *
+
 .wp-caption { border:1px solid #666; text-align:center; background:#ccc; padding:10px; margin:10px }
 .wp-caption-text{}
 .gallery-caption{}
-*/
+
 /* =========================CSS3 MEDIA QUERIES========================= */
 @media all and (orientation:portrait) {
 
@@ -308,7 +297,7 @@ a.editlink{display:inline!important;width:auto!important;height:auto!important;f
 
 @media screen and (min-device-width: 480px) {
   
-  /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
 }
 
 @media screen and (min-width: 800px) {
