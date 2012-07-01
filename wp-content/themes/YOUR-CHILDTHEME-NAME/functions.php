@@ -366,7 +366,7 @@ if ( is_admin() ) {
      *    plugged function from cb-std-sys - Parent-Theme
      *    
      *    @since    YOUR-CHILDTHEME-NAME 0.1
-
+    */
     function serve_humanstxt(){
     	header( 'Content-Type: text/plain; charset=utf-8' );
     ?>
@@ -394,7 +394,7 @@ if ( is_admin() ) {
     <?php
       die();
     }
-     */
+     
 
 
 		/**
