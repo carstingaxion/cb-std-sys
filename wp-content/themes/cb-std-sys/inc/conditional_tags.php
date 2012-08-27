@@ -37,4 +37,24 @@
 
 
 
+		/**
+		* Helper to check if a shortcode is registered in WordPress.
+		*
+		* @example  shortcode_exists( 'caption' ) - will return true.
+		* @example  shortcode_exists( 'foobar' ) - will return false.
+		* 
+		* @since    0.2.1
+		* @source   https://gist.github.com/1887242
+		*/
+		function shortcode_exists( $shortcode = false ) {
+				global $shortcode_tags;
+				
+				if ( ! $shortcode )
+				    return false;
+				
+				if ( array_key_exists( $shortcode, $shortcode_tags ) )
+				    return true;
+				
+				return false;
+		}
 ?>
