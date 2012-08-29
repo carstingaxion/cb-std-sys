@@ -281,6 +281,8 @@
       	good_old_sandbox_date_classes( time(), $classes );
         
         if ( is_singular() ) {
+            $classes[] = 'singular';
+            	
             // category nicenames
             foreach((get_the_category($post->ID)) as $category)
                 $classes[] = 'cat-'.$category->category_nicename;
