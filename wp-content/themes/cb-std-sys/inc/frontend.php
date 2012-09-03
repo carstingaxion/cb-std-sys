@@ -280,7 +280,7 @@
         // Applies the time- and date-based classes (below) to BODY element
       	good_old_sandbox_date_classes( time(), $classes );
         
-        if ( is_singular() ) {
+        if ( is_singular() && ( !is_home() && !is_front_page() ) ) {
             $classes[] = 'singular';
             	
             // category nicenames
