@@ -32,7 +32,7 @@
 	          print_r( get_defined_constants() );
 	          print('-->');
 	        }
-	        if ( !in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) && constant( 'WP_LOCAL_DEV' ) === false )
+	        if ( !in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) && ( defined( 'WP_LOCAL_DEV' )  && constant( 'WP_LOCAL_DEV' ) === false ) )
 	        include_once WP_CONTENT_DIR.'/maintenance.php';
 	      }
     }
@@ -280,9 +280,10 @@
         // Applies the time- and date-based classes (below) to BODY element
       	good_old_sandbox_date_classes( time(), $classes );
         
-        if ( is_singular() && ( !is_home() && !is_front_page() ) ) {
+        if ( ( is_singular() || is_404() ) && ( !is_home() && !is_front_page() ) ) 
             $classes[] = 'singular';
-            	
+            
+        if ( is_singular()  && ( !is_home() && !is_front_page() ) ) {            
             // category nicenames
             foreach((get_the_category($post->ID)) as $category)
                 $classes[] = 'cat-'.$category->category_nicename;
