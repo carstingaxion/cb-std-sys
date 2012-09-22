@@ -954,4 +954,44 @@ $Toscho_Media_Artist = new Toscho_Media_Artist(
 ,   'Foto: '
 );
 
+
+
+    /**
+     *  Add CSS class to linked images, inserted via TinyMCE
+     *  
+     *  @since  0.2.1
+     *  @source http://wordpress.stackexchange.com/a/11757
+     *       
+     *  @see    http://www.island94.org/2011/01/adding-class-to-wordpress-linked-images/          
+     */     
+    function cbstdsys_add_class_to_linked_images( $html, $attachment_id, $attachment ) {
+        
+        $css_class_to_add = 'linked-image';
+        $linkptrn = '/<a[^>]*>/';
+        $found = preg_match($linkptrn, $html, $a_elem);
+    
+        // If no link, do nothing
+        if( $found <= 0 ) return $html;
+    
+        $a_elem = $a_elem[0];
+    
+        // Check to see if the link is to an uploaded image
+        $is_attachment_link = strstr( $a_elem, get_option( 'upload_url_path' ) );
+    
+        // If link is to external resource, do nothing
+        //if($is_attachment_link === FALSE) return $html;
+        
+        // If link already has class defined inject it to attribute
+        if( strstr( $a_elem, 'class="' ) !== FALSE ) { 
+            $a_elem_new = str_replace('class="', 'class="'.$css_class_to_add.' ', $a_elem);
+            $html = str_replace($a_elem, $a_elem_new, $html);
+        // If no class defined, just add class attribute
+        } else { 
+            $html = str_replace('<a ', '<a class="'.$css_class_to_add.' "', $html);
+        }
+    
+        return $html;
+    }
+    add_filter( 'image_send_to_editor', 'cbstdsys_add_class_to_linked_images', 10, 3 );
+
 ?>
