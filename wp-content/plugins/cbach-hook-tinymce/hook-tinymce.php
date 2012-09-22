@@ -3,10 +3,16 @@
 Plugin Name: Hook TinyMCE
 Plugin URI: 
 Description: 
-Version: 0.0.2
+Version: 0.0.3
 Author: Carsten Bach
 Author URI: http://carsten-bach.de/
 Last Change: 
+
+0.0.3 - 28.08.2012
+  fixed "undefined index" errors
+
+
+0.0.2
 */   
 		$cbstdsys_opts = get_option('cbstdsys_options');
     #$current_user = wp_get_current_user();
@@ -121,9 +127,10 @@ Last Change:
           'mailto',
           'nonbreaking'
         );
-        foreach( $external_plugins as $plug ) {
-            $plugin_array[$plug] .= plugins_url('/tinymce/'.$plug.'/editor_plugin.js', __FILE__ );
+        foreach( $external_plugins as $v ) {
+            $new_plugin_array[$v] = plugins_url( '/tinymce/'.$v.'/editor_plugin.js', __FILE__ );
         }
+        $plugin_array = array_merge( $plugin_array, $new_plugin_array );
         return $plugin_array;
     }
     
