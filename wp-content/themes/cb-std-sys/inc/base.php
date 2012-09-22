@@ -384,11 +384,11 @@ function modify_admin_bar ( $wp_admin_bar ) {
 				
         // Remove 'Posts'
         if ( ! cbstdsys_opts('m_blog') )
-						$wp_admin_bar->remove_node('post');
+						$wp_admin_bar->remove_node('new-post');
 
         // Remove 'Links'.
         if ( ! cbstdsys_opts('m_links') )
-						$wp_admin_bar->remove_node('link');
+						$wp_admin_bar->remove_node('new-link');
 
 				// disable background links
         if ( ! cbstdsys_opts('d_bg_images') )
