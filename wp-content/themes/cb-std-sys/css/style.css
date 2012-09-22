@@ -236,13 +236,13 @@ nav.pagination a[rel="next"]{ float:right;}
 
 /* =========================HTML5 BOILERPLATE HELPER CLASSES=========================*/
 .social-imr, .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
-.hidden, .wpcf7-display-none { display: none; }
+.hidden, .wpcf7-display-none { display: none; visibility: hidden; }
 .visuallyhidden, .logged-in .social-label { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
 .invisible { visibility: hidden; }
 .social-clearfix:before, .clearfix:before, .social-clearfix:after, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
-.social-clearfix:after, .clearfix:after, br { clear: both; }
+.social-clearfix:after, .clearfix:after { clear: both; }
 .social-clearfix, .clearfix { zoom: 1; }
 
 
