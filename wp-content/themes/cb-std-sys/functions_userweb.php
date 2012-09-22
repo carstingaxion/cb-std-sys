@@ -54,8 +54,7 @@ if ( is_admin() ) {
 		         *  @since  0.1.2
 		         */
             $bwp_minify_plugins_url_addon = $bwp_minify_themes_url_addon 	= ''; 
-		        $bwp_opts = get_option('bwp_minify_general');
-		        if ( class_exists('BWP_MINIFY') && $bwp_opts['enable_auto'] == 'yes') {
+		        if ( class_exists('BWP_MINIFY') ) {
 								$bwp_minify_plugins_url_addon = WP_CONTENT_URL;
 								$bwp_minify_themes_url_addon 	= WP_CONTENT_URL.str_replace( WP_CONTENT_DIR, '', TEMPLATEPATH );
 						}
@@ -67,11 +66,32 @@ if ( is_admin() ) {
 		         *
 		         *  @since 0.1.2
 		         */
-						$jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js';
+						$jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js';
 						if ( !fopen($jquery, 'r') ) {
-		      	$jquery = $bwp_minify_themes_url_addon.'/js/libs/jquery-1.6.4.min.js';
+		      	$jquery = $bwp_minify_themes_url_addon.'/js/libs/jquery-1.8.1.min.js';
 						}
-		        $jquery_ver = '1.6.4';
+		        $jquery_ver = '1.8.1';
+/*
+// liefert leider immer NULL
+var_dump( wp_register_script( 'jquery', includes_url( 'js/jquery/jquery.js' ), null, $jquery_ver, true ) );
+
+// Load jQuery in footer
+if ( ! is_a( $wp_scripts, 'WP_Scripts' ) ) {
+    $wp_scripts = new WP_Scripts();
+}
+$jquery = $wp_scripts->query( 'jquery' );
+if ( ! empty( $jquery ) ) {
+    $jquery_ver = $wp_scripts->query( 'jquery' )->ver;
+    wp_deregister_script( 'jquery' );
+    //wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/' . $jquery_ver . '/jquery.min.js', null, null, true );
+    wp_register_script( 'jquery', includes_url( 'js/jquery/jquery.js' ), null, $jquery_ver, true );
+} else {
+    $jquery_ver = '1.7.2';
+    wp_deregister_script( 'jquery' );
+    wp_register_script( 'jquery', WP_THEME_URL . '/js/libs/jquery-' . $jquery_ver . '.min.js', null, null, true );
+}
+wp_enqueue_script( 'jquery' );
+*/
 
 
 						/**
@@ -243,12 +263,13 @@ if ( is_admin() ) {
 						
 						
 						// Microdata schema.org Debug
+/*
 						if ( ( (defined( 'WP_LOCAL_DEV' ) && constant( 'WP_LOCAL_DEV' ) ) || constant( 'WP_DEBUG' ) ) && in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) ) {
 		            wp_enqueue_script('jquery', $jquery, false, $jquery_ver, true);
 		            wp_enqueue_script('schema_org_debug_lib', $schema_org_debug_lib, array('jquery'),false, true);
 		            wp_enqueue_script('schema_org_debug', $schema_org_debug, array('jquery','schema_org_debug_lib'),false, true);
 						}
-
+*/
 		        return $post;
 		    }
 
@@ -288,19 +309,62 @@ if ( is_admin() ) {
 		if ( ! function_exists( 'add_ie_cond_js' ) ) :
 				function add_ie_cond_js() {
 		    		global $is_winIE, $is_macIE;
-		    		if ( $is_macIE || $is_winIE ) {	?>
+		    		if ( $is_macIE || $is_winIE ) {	
 
+		        /**
+		         *  Construct corret URIs for use with 'BWP-Minify'-PLugin
+		         *
+		         *  @since  0.1.2
+		         */
+            $bwp_minify_plugins_url_addon = $bwp_minify_themes_url_addon 	= ''; 
+		        if ( class_exists('BWP_MINIFY') ) {
+								$bwp_minify_plugins_url_addon = WP_CONTENT_URL;
+								$bwp_minify_themes_url_addon 	= WP_CONTENT_URL.str_replace( WP_CONTENT_DIR, '', TEMPLATEPATH );
+						} ?>
 			<!--[if (gte IE 6)&(lte IE 9)]>
-				<script src="js/libs/selectivizr.1.0.2.min.js"></script>
+				<script src="<?php echo $bwp_minify_themes_url_addon; ?>/js/libs/selectivizr.1.0.2.min.js"></script>
 			<![endif]-->
 			<!--[if lt IE 7 ]>
-				<script src="js/libs/dd_belatedpng.js"></script>
+				<script src="<?php echo $bwp_minify_themes_url_addon; ?>/js/libs/dd_belatedpng.js"></script>
 			<![endif]-->
 				<?php } }
 				add_action('wp_footer', 'add_ie_cond_js', 900);
 		endif;
 
 
+
+		/**
+		 *  Conditional load fix-script for IE
+		 *
+		 *  html5shiv - 
+		 *  @link   
+		 *
+		 *  @since  0.2.1
+		 */
+		if ( ! function_exists( 'add_ie_cond_js_before_html' ) ) :
+				function add_ie_cond_js_before_html() {
+		    		global $is_winIE, $is_macIE;
+		    		if ( $is_macIE || $is_winIE ) {	
+
+		        /**
+		         *  Construct corret URIs for use with 'BWP-Minify'-PLugin
+		         *
+		         *  @since  0.1.2
+		         */
+            $bwp_minify_plugins_url_addon = $bwp_minify_themes_url_addon 	= ''; 
+		        if ( class_exists('BWP_MINIFY') ) {
+								$bwp_minify_plugins_url_addon = WP_CONTENT_URL;
+								$bwp_minify_themes_url_addon 	= WP_CONTENT_URL.str_replace( WP_CONTENT_DIR, '', TEMPLATEPATH );
+						} ?>
+      <!--[if lt IE 9]>
+        <script src="<?php echo $bwp_minify_themes_url_addon; ?>/js/libs/html5shiv.js"></script>
+      <![endif]-->
+				<?php } }
+				add_action('wp_head', 'add_ie_cond_js_before_html', 900);
+		endif;
+    
+    
+    
     /**
      *  Next & Previous Navigation for Fancybox
      *	manipulate the [gallery]-shortcode and integrate rel-Attributes
