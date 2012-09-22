@@ -37,10 +37,10 @@ define('WP_MEMORY_LIMIT', '72M');
 /** define theese for better performance ( no trailing slash )  **/
 if ( defined( 'WP_LOCAL_DEV' ) ){
 		$abs_path = 'ENTER-THE-LOCAL-ABSPATH-HERE';
-		$url_path = 'http://ENTER-THE-LOCAL-URL-HERE';
+		$url_path = 'http://www.ENTER-THE-LOCAL-URL-HERE';
 } else {
 		$abs_path = 'ENTER-THE-LIVE-ABSPATH-HERE';
-		$url_path = 'http://ENTER-THE-LIVE-URL-HERE';
+		$url_path = 'http://www.ENTER-THE-LIVE-URL-HERE';
 }
 
 define('WP_HOME', $url_path);  
