@@ -1,3 +1,6 @@
 [submodule "Remove-Comments-Absolutely"]
 	path = wp-content/mu-plugins/Remove-Comments-Absolutely
 	url = git://github.com/bueltge/Remove-Comments-Absolutely.git
+[submodule "wp-content/plugins/Remove-Comments-Absolutely"]
+	path = wp-content/plugins/Remove-Comments-Absolutely
+	url = git://github.com/bueltge/Remove-Comments-Absolutely.git
