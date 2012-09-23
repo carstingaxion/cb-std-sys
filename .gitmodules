@@ -1,6 +1,3 @@
 [submodule "wp-content/plugins/Remove-Comments-Absolutely"]
 	path = wp-content/plugins/Remove-Comments-Absolutely
 	url = git://github.com/bueltge/Remove-Comments-Absolutely.git
-[submodule "wp-content/themes/plugins/Germanix-WordPress-Plugin"]
-	path = wp-content/themes/plugins/Germanix-WordPress-Plugin
-	url = git://github.com/toscho/Germanix-WordPress-Plugin.git
