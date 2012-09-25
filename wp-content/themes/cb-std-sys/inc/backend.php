@@ -782,7 +782,8 @@ function webdev_partner_rss_dashboard_widget() {
 				unlink($uploaded_image_location);
 
 				// rename the large image
-				rename($large_image_location,$uploaded_image_location);
+        			// trim all pathes to make sure, we don't have any specials chars arround
+				rename( trim( $large_image_location ), trim( $uploaded_image_location ) );
 
 				// update image metadata and return them
 				$image_data['width'] = $image_data['sizes']['large']['width'];
