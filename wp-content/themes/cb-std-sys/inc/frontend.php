@@ -504,7 +504,7 @@
 */
       	}    
     }  
-    add_action('pre_get_posts', 'filter_everything_then_feeds' );
+    #add_action('pre_get_posts', 'filter_everything_then_feeds' );
 
 
 
