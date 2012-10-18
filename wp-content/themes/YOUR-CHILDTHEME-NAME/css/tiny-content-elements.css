@@ -7,308 +7,450 @@ editor-style to make the WYSIWYG experience more specific.
  */
  
 html .mceContentBody {
-	max-width: 584px;
-}
-* {
-	color: inherit;
-	font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-style: inherit;
-	font-weight: inherit;
-	line-height: 1.625;
-}
-body {
-	color: #333;
-	font: 15px "Helvetica Neue", Helvetica, Arial, "Nimbus Sans L", sans-serif;
-	font-weight: 300;
-	line-height: 1.625;
+    max-width: 660px;
 }
 
-/* Headings */
-h1,h2,h3,h4,h5,h6 {
-	clear: both;
+/* =========================  COLOURS  ========================= */
+::-moz-selection{ background: #FF5E99; color:#fff; }
+::selection { background:#FF5E99; color:#fff; }
+a:link { -webkit-tap-highlight-color: #FF5E99; }
+
+body, select, input, textarea { 
+    color: #444; 
 }
+a,
+a:link, 
+a:active, 
+a:visited { 
+    color: #607890; 
+}
+a:focus,
+a:hover { 
+    color: #036; 
+}
+a:focus, 
+input[type=submit]:focus { 
+    outline-color: #FF5E99; 
+}
+hr { 	
+    background-color: #ccc; 
+}
+
+blockquote cite,
+.mceContentBody blockquote cite {
+  	color: #666;
+}    
+abbr, acronym, dfn {
+  	border-color: #666;
+}
+pre {
+  	background: #f4f4f4;
+} 
+del {
+	  color: #333;
+}
+ins {
+  	background: #fff9c0;
+  	color: #333;
+} 
+tr th {
+  	color: #666;
+}
+img,
+td,
+.wp-caption a:focus img,
+.wp-caption a:active img,
+.wp-caption a:hover img,
+a:focus img[class*="wp-image-"],
+a:hover img[class*="wp-image-"],
+a:active img[class*="wp-image-"] {
+  	border-color: #ddd;
+}
+
+.wp-caption,
+a:focus img[class*="wp-image-"],
+a:hover img[class*="wp-image-"],
+a:active img[class*="wp-image-"] {
+  	background: #eee;
+}
+.wp-caption img {
+  	border-color: #eee;
+}
+.wp-caption .wp-caption-text,
+.wp-caption-dd {
+  	color: #666;
+}
+.wp-caption .wp-caption-text:before {
+  	color: #666;
+}
+
+.wp-caption a:focus img,
+.wp-caption a:active img,
+.wp-caption a:hover img {
+  	background: #fff;
+}          
+/* =========================  FONTS & SIZES  ========================= */
+body,
+select,
+blockquote cite,
+.mceContentBody blockquote cite{
+    font-family: Arial, Helvetica, Tahoma, sans-serif; 
+}
+
 h1,
-h2 {
-	color: #000;
-	font-size: 15px;
-	font-weight: bold;
-	margin: 0 0 .8125em;
-}
-h3 {
-	font-size: 10px;
-	letter-spacing: 0.1em;
-	line-height: 2.6em;
-	text-transform: uppercase;
-}
-h4, h5, h6 {
-	font-size: 14px;
-	margin: 0;
-}
-hr {
-	background-color: #ccc;
-	border: 0;
-	height: 1px;
-	margin-bottom: 1.625em;
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+.wp-caption .wp-caption-text,
+.wp-caption-dd,
+.mceContentBody blockquote,
+.mceContentBody blockquote p {
+    font-family:  Georgia, "Times New Roman", Times, serif;  
 }
 
-/* Text elements */
-p, ul, ol, dl {
-	font-weight: 300;
+pre, code, kbd, code var {
+    font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
-p {
-	margin-bottom: 1.625em;
-}
-ul, ol {
-	margin: 0 0 1.625em 2.5em;
-	padding: 0;
-}
-ul {
-	list-style: square;
-}
-ol {
-	list-style-type: decimal;
-}
-ol ol {
-	list-style: upper-alpha;
-}
-ol ol ol {
-	list-style: lower-roman;
-}
-ol ol ol ol {
-	list-style: lower-alpha;
-}
-ul ul, ol ol, ul ol, ol ul {
-	margin-bottom: 0;
-}
-dl {
-	margin: 0 1.625em;
-}
-dt {
-	font-size: 15px;
-	font-weight: bold;
-}
-dd {
-	margin: 0 0 1.625em;
-}
-strong {
-	font-weight: bold;
-}
-cite, em, i {
-	font-style: italic;
-}
-cite {
-	border: none;
+.amp {font:italic 1.25em/1em "Goudy Old Style",Baskerville,"Palatino Linotype",Palatino,Constantia,Georgia,'Book Antiqua','Times New Roman',serif;position: relative;top:.1em;}
+
+h1,h2,h3,h4,h5,h6 {  font-weight:normal;  margin:0 0 0.25em 0;}
+
+h1 { font-size:250%; }                       /* 30px */
+h2 { font-size:200%; }                       /* 24px */
+h3 { font-size:150%; }                       /* 18px */
+h4 { font-size:133.33%; }                    /* 16px */
+h5 { font-size:116.67%; }                    /* 14px */
+h6 { font-size:116.67%; }                    /* 14px */
+
+
+body {
+  	font-weight: 300;
+  	line-height: 1.625;
 }
 big {
-	font-size: 131.25%;
+    font-size: 131.25%;
+}
+sup,
+sub {
+  	font-size: 10px;
+}
+.wp-caption .wp-caption-text,
+.wp-caption-dd,
+.mceContentBody blockquote cite {
+  	font-size: 12px;
+}
+pre, code, kbd, code var {
+    font-size: 13px;
+}    
+
+/* =========================  TEXT-ELEMENTS  ========================= */
+p, ul, ol, dl {
+    font-weight: 300;
+}
+p { 
+    line-height:1.5em; 
+    margin:0 0 1em 0;
+}
+ul, ol {
+  	margin: 0 0 1.625em 2.5em;
+  	padding: 0;
+}
+ul {
+	  list-style: square;
+}
+ol {
+    list-style-type: decimal;
+}
+ol ol {
+    list-style: upper-alpha;
+}
+ol ol ol {
+    list-style: lower-roman;
+}
+ol ol ol ol {
+    list-style: lower-alpha;
+}
+ul ul, ol ol, ul ol, ol ul {
+    margin-bottom: 0;
+}
+dl {
+    margin: 0 1.625em;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin: 0 0 1.625em;
+}
+strong {
+    font-weight: bold;
+}
+cite, em, i {
+    font-style: italic;
+}
+#content q, 
+#content cite {
+    margin: 0 .4em;
+    border: none;
 }
 .mceContentBody blockquote,
 .mceContentBody blockquote p {
-	font-family: Georgia, "Bitstream Charter", serif !important;
-	font-style: italic !important;
-	font-weight: normal;
-	margin: 0 3em;
+  	font-style: italic;
+  	font-weight: normal;
+  	margin: 0 3em;
 }
 .mceContentBody blockquote em,
 .mceContentBody blockquote i,
 .mceContentBody blockquote cite {
-	font-style: normal;
+	  font-style: normal;
 }
 .mceContentBody blockquote cite {
-	color: #666;
-	font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 300;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
+  	font-weight: 300;
+  	letter-spacing: 0.05em;
+  	text-transform: uppercase;
 }
 pre {
-	background: #f4f4f4;
-	font: 13px "Courier 10 Pitch", Courier, monospace;
-	line-height: 1.5;
-	margin-bottom: 1.625em;
-	padding: 0.75em 1.625em;
+  	font: 13px "Courier 10 Pitch", Courier, monospace;
+  	line-height: 1.5;
+  	margin-bottom: 1.625em;
+  	padding: 0.75em 1.625em;
 }
 code, kbd, code var {
-	font: 13px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+    font: 13px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
 abbr, acronym, dfn {
-	border-bottom: 1px dotted #666;
-	cursor: help;
+  	border-bottom: 1px dotted;
+  	cursor: help;
 }
 address {
-	display: block;
-	margin: 0 0 1.625em;
+  	display: block;
+  	margin: 0 0 1.625em;
 }
 del {
-	color: #333;
+    text-decoration: line-through;
 }
 ins {
-	background: #fff9c0;
-	border: none;
-	color: #333;
-	text-decoration: none;
+  	border: none;
+  	text-decoration: none;
 }
 sup,
 sub {
-	font-size: 10px;
-	height: 0;
-	line-height: 1;
-	position: relative;
-	vertical-align: baseline;
+  	height: 0;
+  	line-height: 1;
+  	position: relative;
+  	vertical-align: baseline;
 }
 sup {
-	bottom: 1ex;
+	  bottom: 1ex;
 }
 sub {
-	top: .5ex;
+    top: .5ex;
 }
-input[type=text],
-textarea {
-	background: #fafafa;
-	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
-	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
-	box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
-	border: 1px solid #ddd;
-	color: #888;
-}
-input[type=text]:focus,
-textarea:focus {
-	color: #333;
-}
-textarea {
-	padding-left: 3px;
-	width: 98%;
-}
-input[type=text] {
-	padding: 3px;
+hr {
+  	border: 0;
+  	height: 1px;
+  	margin-bottom: 1.625em;
 }
 
-/* Links */
+/* =========================  LINKS  ========================= */
 a,
 a em,
 a strong {
-	color: #1b8be0;
-	text-decoration: none;
+    text-decoration: none;
 }
+
+#main a,
+#main a:link,
+#main a:visited,
+.mceContentBody a,
+.mceContentBody a:link,
+.mceContentBody a:visited{
+
+}
+
+#main a:focus,
+#main a:active,
+#main a:hover, 
+.mceContentBody a:focus,
+.mceContentBody a:active,
+.mceContentBody a:hover {
+
+}
+
 a:focus,
 a:active,
-a:hover {
-	text-decoration: underline;
+a:hover,
+.current-menu-item > a {
+    text-decoration: underline;
 }
 
-/* Alignment */
+a:focus, 
+input[type=submit]:focus { outline: 2px dotted; }
+
+#content .entry-content a[href^="http"]:before {
+}
+
+#content .entry-content a[href^="http"]:hover:after, 
+#content .entry-content a[href^="http"]:focus:after {
+}
+
+a[href$=".pdf"]{
+    background:transparent url("../img/pdf.gif") no-repeat 10px 50%;
+    text-decoration: none;
+    padding:10px 10px 10px 35px;
+}
+
+a[href$=".pdf"]:hover,
+a[href$=".pdf"]:focus,
+a[href$=".pdf"]:active{
+    text-decoration: underline;
+}
+
+/* =========================  GENERIC PSEUDOS to choose via TINYMCE (copy from eitor-style.css) ========================= */
+.highlight, .comment-awaiting-moderation { color:#c30; }
+.dimmed { color:#888; }
+.info, .memo, .important, .error, .wpcf7-not-valid-tip, .wpcf7-validation-errors,
+.wpcf7-spam-blocked, .wpcf7-not-valid-tip-no-ajax, .success, .wpcf7-mail-sent-ok{padding:10px; margin-bottom:1em;}
+.info { background:#f8f8f8; color:#666; font-size:91.7%; }
+.memo, .success, .wpcf7-mail-sent-ok { background:#efe; color:#040; border:2px #484 solid;  }
+.important { background:#ffe; color:#440; border:2px #884 solid; }
+.error, .wpcf7-not-valid-tip, .wpcf7-validation-errors, .wpcf7-spam-blocked, .wpcf7-not-valid-tip-no-ajax
+{background:#fee; color:#400; border:2px #844 solid; }
+.highlight *, .dimmed *, .info *, .memo *, .important *{  background-color: transparent!important; margin:0;}
+
+
+/* =========================  BUTTONS & PAGING  ========================= */
+button, 
+.button,
+input[type="submit"], 
+#main nav.pagination a:link,
+#main nav.pagination a:visited,
+#main nav.pagination a.page-numbers,
+#main nav.pagination span.current,
+#main nav.pagination span.page-numbers,
+#main nav.pagination span.page-numbers.dots {
+      
+}
+
+button:active,
+button:focus,
+button:hover, 
+.button:active,
+.button:focus,
+.button:hover, 
+input[type="submit"]:active, 
+input[type="submit"]:focus,
+input[type="submit"]:hover,
+#main nav.pagination a:active,
+#main nav.pagination a:focus,
+#main nav.pagination a:hover,
+#main nav.pagination span.current,
+#main nav.pagination span.page-numbers {
+
+}
+
+nav.pagination span.current,
+nav.pagination span.page-numbers {
+    cursor: default;
+}
+
+/* =========================  ALIGNMENT  ========================= */
 .alignleft {
-	display: inline;
-	float: left;
-	margin-right: 1.625em;
+  	display: inline;
+  	float: left;
+  	margin-right: 1.625em;
 }
 .alignright {
-	display: inline;
-	float: right;
-	margin-left: 1.625em;
+  	display: inline;
+  	float: right;
+  	margin-left: 1.625em;
 }
 .aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+  	clear: both;
+  	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
 }
 
-/* Tables */
+/* =========================  TABLES  ========================= */
 table {
-	border: none !important;
-	border-bottom: 1px solid #ddd !important;
-	border-collapse: collapse;
-	border-spacing: 0;
-	text-align: left;
-	margin: 0 0 1.625em;
-	width: 100%;
+  	border: none !important;
+  	border-bottom: 1px solid #ddd !important;
+  	border-collapse: collapse;
+  	border-spacing: 0;
+  	text-align: left;
+  	margin: 0 0 1.625em;
+  	width: 100%;
 }
-tr th {
-	border: none !important;
-	color: #666;
-	font-size: 10px;
-	font-weight: 500;
-	letter-spacing: 0.1em;
-	line-height: 2.6em;
-	text-transform: uppercase;
+thead, tr th {
+  	border: none !important;
+  	font-size: 10px;
+  	font-weight: 500;
+  	letter-spacing: 0.1em;
+  	line-height: 2.6em;
+  	text-transform: uppercase;
 }
 td {
-	border: none !important;
-	border-top: 1px solid #ddd !important;
-	padding: 6px 10px 6px 0;
+  	border: none;
+  	border-top: 1px solid;
+  	padding: 6px 10px 6px 0;
 }
 
-/* Images */
+/* =========================  IMAGES  ========================= */
 img[class*="wp-image-"] {
-	height: auto;
-	max-width: 97.5%;
+  	height: auto;
 }
 img.size-full {
-	width: auto; /* Prevent stretching of full-size images in IE8 */
+    width: auto; /* Prevent stretching of full-size images in IE8 */
 }
 img.wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
+  	border: none;
+  	margin-bottom: 0;
+  	margin-top: 0;
+  	padding: 0;
 }
 p img,
 .wp-caption {
-	margin-top: 0.4em;
+    margin-top: 0.4em;
 }
 img {
-	border: 1px solid #ddd;
-	padding: 6px;
+  	border: 1px solid;
+  	padding: 6px;
 }
 img.alignleft,
 img.alignright,
 img.aligncenter {
-	margin-bottom: 1.625em;
+    margin-bottom: 1.625em;
 }
 .wp-caption {
-	background: #eee;
-	border: none;
-	margin-bottom: 1.625em;
-	max-width: 96%;
-	padding: 9px;
+  	border: none;
+  	margin-bottom: 1.625em;
+  	max-width: 96%;
+  	padding: 9px;
 }
 .wp-caption img {
-	display: block;
-	margin: 5px auto 0 !important;
-	max-width: 98%;
-	border-color: #eee;
+  	display: block;
+  	margin: 5px auto 0 !important;
+  	max-width: 98%;
 }
 .wp-caption .wp-caption-text,
 .wp-caption-dd {
-	color: #666;
-	font-family: Georgia, serif !important;
-	font-size: 12px;
-	margin: 0 0 0.6em 0 !important;
-	padding: 0 0 5px 40px;
-	position: relative;
-	text-align: left;
+  	margin: 0 0 0.6em 0 !important;
+  	padding: 0 0 5px 40px;
+  	position: relative;
+  	text-align: left;
 }
 .wp-caption .wp-caption-text:before {
-	color: #666;
-	content: '\2014';
-	font-size: 14px;
-	font-style: normal;
-	font-weight: bold;
-	margin-right: 5px;
-	position: absolute;
-	left: 10px;
-	top: 7px;
-}
-a:focus img[class*="wp-image-"],
-a:hover img[class*="wp-image-"],
-a:active img[class*="wp-image-"] {
-	background: #eee;
-	border-color: #bbb;
-}
-.wp-caption a:focus img,
-.wp-caption a:active img,
-.wp-caption a:hover img {
-	background: #fff;
-	border-color: #ddd;
+  	content: '\2014';
+  	font-size: 14px;
+  	font-style: normal;
+  	font-weight: bold;
+  	margin-right: 5px;
+  	position: absolute;
+  	left: 10px;
+  	top: 7px;
 }
