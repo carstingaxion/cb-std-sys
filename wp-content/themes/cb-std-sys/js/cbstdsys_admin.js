@@ -1,3 +1,15 @@
+jQuery.fn.countExcerptWords = function( $excerpt, $counter ){
+
+    var $number = 0;
+    var $matches = $excerpt.val().match(/\b/g);
+    if( $matches ) {
+        $number = $matches.length/2;
+    }
+    $counter.css({color:( $number > cbstdsys_admin_js_vars.excerpt_length ? '#B00' : 'inherit')});
+    $counter.html( cbstdsys_admin_js_vars.i18n_wordcount + ' ' + $number + '/' + cbstdsys_admin_js_vars.excerpt_length);    
+    
+};
+
 jQuery(document).ready(function($) {
 
 /******************************************************************************
@@ -11,6 +23,21 @@ jQuery(document).ready(function($) {
 		// remove excerpt-description with Link to WP-Codex
 		$("#postexcerpt p").remove();
 		
+    // Add Excerpt Counter
+    var $excerpt = $('#excerpt');
+		// Only activate if there's an excerpt field:
+		if ( $excerpt.length ) {
+				
+        // Create counter 
+				var $counter = $('<small class="alignright subtitle"/>').insertAfter( $('#postexcerpt h3 span') );
+				
+				// Bind keystrokes:
+				$excerpt.on('keydown keyup keypress focus blur paste', function() { $.fn.countExcerptWords( $excerpt, $counter ) } );
+				
+				// Do it the first time:
+				$.fn.countExcerptWords( $excerpt, $counter );
+		}
+
 		// remove 'title-form' checkbox and label from Screensettings-Tab
 		$("#slugdiv-hide").parent().remove();
 
