@@ -18,6 +18,7 @@
 	<meta charset="utf-8">
 <?php // www.phpied.com/conditional-comments-block-downloads/ ?>
 	<!--[if IE]><![endif]-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<base href="<?php echo WP_HOME; ?>">
 	<meta name='author' content='<?php echo cb_std_sys_get_page_author_meta(); ?>'>
 	<link type="text/plain" rel="author" href="/humans.txt">
@@ -58,7 +59,7 @@
   maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width
   
   **/ ?>
-	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+	<meta name="viewport" content="width=device-width;">
 	<link rel='shortcut icon' href='/favicon.ico'>
 <?php // For iPhone 4 with high-resolution Retina display: ?>
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png">
@@ -71,7 +72,7 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 <?php	wp_head(); ?>
-	<script src="/js/libs/modernizr-1.7.min.js"></script>
+	<script src="/js/libs/modernizr-2.6.1.min.js"></script>
 </head>
 <?php if ( cbstdsys_opts('m_multi_lang') ) { ?>
 <body dir="ltr" lang="<?php echo ICL_LANGUAGE_CODE; ?>" <?php body_class(); ?> role="document">
