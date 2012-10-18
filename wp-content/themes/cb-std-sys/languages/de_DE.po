@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cb-std-sys\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-18 11:49+0100\n"
+"POT-Creation-Date: 2012-10-11 23:49+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Carsten Bach <mail@carsten-bach.de>\n"
 "Language-Team: Carsten Bach | Mediengestaltung <mail@carsten-bach.de>\n"
@@ -13,11 +13,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: _e;__;_x;_ex\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__;_x;_ex;_n;_n:1,2;esc_attr__\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.5.3\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ./..\n"
 
 # <?php if ( is_day() ) : ?>
 # <?php printf( __( 'Daily Archives: %s', 'cb-std-sys' ), get_the_date() ); ?>
@@ -61,7 +63,7 @@ msgstr "Archiv des Autors: %s"
 # <h1 class="page-title"><?php
 # printf( __( 'Category Archives: %s', 'cb-std-sys' ), '' . single_cat_title( '', false ) . '' );
 # ?></h1>
-#: ../category.php:24
+#: ../category.php:25
 #, php-format
 msgid "Category Archives: %s"
 msgstr "Archiv der Kategorie: %s"
@@ -97,6 +99,12 @@ msgstr ""
 "<a href=\"%2$s\">Firefox</a>, <a href=\"%3$s\">Chrome</a> oder <a href=\"%4$s"
 "\">Safari</a>."
 
+#: ../format-standard.php:4 ../format-standard.php:24 ../format.php:4
+#: ../format.php:22 ../loop-four04.php:52
+#, php-format
+msgid "Permalink to %s"
+msgstr "dauerhafter Link zu"
+
 # ?>
 # <p><?php _e( 'Comments are closed.', 'cb-std-sys' ); ?></p>
 # <?php endif; // end ! comments_open() ?>
@@ -104,10 +112,6 @@ msgstr ""
 #: ../social-comments.php:28
 msgid "Comments are closed."
 msgstr "Die Kommentarfunktion ist geschlossen."
-
-#: ../front-page.php:122
-msgid "zuletzt im Blog"
-msgstr ""
 
 # $std_script_i18n = array(
 # 'goback'      => __( '&larr; Take me back from where I came!', 'cb-std-sys' ),
@@ -148,14 +152,13 @@ msgid "Cite"
 msgstr "Zitat"
 
 #: ../functions_userweb.php:156 ../inc/backend.php:640
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1293
 msgid "Source"
 msgstr "Quelle"
 
 # function twentyten_continue_reading_link() {
 # return ' <a class="readmore" href="'. get_permalink() . '" title="' .  sprintf( esc_attr__( 'Continue reading \'%s\'', 'cb-std-sys' ), the_title_attribute( 'echo=0' ) ) . '">' . sprintf( __( 'Continue reading \'%s\'', 'cb-std-sys' ), get_the_title() ). '<span class="meta-nav">&rarr;</span></a>';
 # }
-#: ../functions_userweb.php:498
+#: ../functions_userweb.php:498 ../functions_userweb.php:512
 #, php-format
 msgid "Continue reading '%s'"
 msgstr "'%s' weiterlesen"
@@ -167,6 +170,14 @@ msgstr "'%s' weiterlesen"
 #, php-format
 msgid "<span class=\"%1$s\">Posted on</span> %2$s %3$s"
 msgstr "<span class=\"%1$s\">Veröffentlicht am</span> %2$s %3$s"
+
+# <?php
+# printf(__('<span class="%1$s">By</span> %2$s', 'cb-std-sys'),
+# 'meta-prep meta-prep-author',
+#: ../functions_userweb.php:573 ../inc/frontend.php:1040
+#, php-format
+msgid "View all posts by %s"
+msgstr "Zeige alle Beiträge von %s"
 
 #: ../functions_userweb.php:575
 msgid "by"
@@ -251,13 +262,13 @@ msgstr "Weiterlesen"
 # <a class="button gohome" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php _e( 'Take me home. &rarr; ', 'cb-std-sys' ); ?></a>
 #
 #: ../loop-four04.php:61
-msgid "Take me home &rarr; "
+msgid "Take me home. &rarr; "
 msgstr "Zur Startseite &rarr; "
 
 # ?>
 # <?php edit_post_link( __( 'Edit', 'cb-std-sys' ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
 # </p><!-- .entry-meta -->
-#: ../onecolumn-page.php:51 ../page.php:43 ../single.php:52
+#: ../page.php:43 ../single.php:52
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -267,6 +278,16 @@ msgstr "Bearbeiten"
 #: ../search.php:19
 msgid "Sorry, but you need to enter a search word in the search field."
 msgstr "Bitte geben Sie eine Suchwort im Eingabefeld ein."
+
+#
+#
+#
+#: ../search.php:29
+#, php-format
+msgid "There is one Search result for: %2$s"
+msgid_plural "There are %1$s Search results for: %2$s"
+msgstr[0] "Ein Suchergebnis für: %2$s"
+msgstr[1] "Es gibt %1$s Suchergebnisse für: %2$s"
 
 # <article id="post-0" class="post no-results not-found">
 # <h2 class="entry-title"><?php _e( 'Nothing Found for:', 'cb-std-sys' ); echo ' <strong class=\'search-phrase\'>'.$q.'</strong>';  ?></h2>
@@ -318,9 +339,12 @@ msgstr "Hinterlasse einen Kommentar"
 # |
 # <?php comments_popup_link( __( 'Leave a comment', 'cb-std-sys' ), __( '1 Comment', 'cb-std-sys' ), __( '% Comments', 'cb-std-sys' ) ); ?>
 # <?php edit_post_link( __( 'Edit', 'cb-std-sys' ), '|', '' ); ?>
-#: ../single.php:48
+#: ../single.php:48 ../social-comments.php:97
+#, php-format
 msgid "1 Comment"
-msgstr "1 Kommentar"
+msgid_plural "%1$s Comments"
+msgstr[0] "%1$s Kommentar"
+msgstr[1] "%1$s Kommentare"
 
 # |
 # <?php comments_popup_link( __( 'Leave a comment', 'cb-std-sys' ), __( '1 Comment', 'cb-std-sys' ), __( '% Comments', 'cb-std-sys' ) ); ?>
@@ -365,6 +389,27 @@ msgstr "1 Antwort"
 msgid "% Replies"
 msgstr "% Antworten"
 
+#: ../social-comments.php:100
+#, php-format
+msgid "1 Tweet"
+msgid_plural "%1$s Tweets"
+msgstr[0] "1 Tweet"
+msgstr[1] "%1$s Tweets"
+
+#: ../social-comments.php:103
+#, php-format
+msgid "1 Facebook"
+msgid_plural "%1$s Facebook"
+msgstr[0] "1 Facebook"
+msgstr[1] "%1$s Facebook"
+
+#: ../social-comments.php:106
+#, php-format
+msgid "1 Pingback"
+msgid_plural "%1$s Pingbacks"
+msgstr[0] "1 Pingback"
+msgstr[1] "%1$s Pingbacks"
+
 #: ../social-comments.php:115
 #, php-format
 msgid "Last reply was %s ago"
@@ -396,48 +441,6 @@ msgstr "Neuere Kommentare &rarr; "
 msgid "Tag Archives: %s"
 msgstr "Schlagwort-Archiv: %s"
 
-#: ../inc/activation.php:78
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:164
-#: ../inc/tgm-plugin-activation/example.php:86
-msgid "Install Required Plugins"
-msgstr ""
-
-#: ../inc/activation.php:79
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:165
-#: ../inc/tgm-plugin-activation/example.php:87
-msgid "Install Plugins"
-msgstr ""
-
-#: ../inc/activation.php:80
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:166
-#: ../inc/tgm-plugin-activation/example.php:88
-#, php-format
-msgid "Installing Plugin: %s"
-msgstr ""
-
-#: ../inc/activation.php:81 ../inc/tgm-plugin-activation/example.php:89
-msgid "Something went wrong with the plugin API."
-msgstr ""
-
-#: ../inc/activation.php:92
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:178
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:488
-#: ../inc/tgm-plugin-activation/example.php:100
-msgid "Return to Required Plugins Installer"
-msgstr ""
-
-#: ../inc/activation.php:93
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:179
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1841
-#: ../inc/tgm-plugin-activation/example.php:101
-msgid "Plugin activated successfully."
-msgstr ""
-
-#: ../inc/activation.php:94 ../inc/tgm-plugin-activation/example.php:102
-#, php-format
-msgid "All plugins installed and activated successfully. %s"
-msgstr ""
-
 #
 # <fieldset>
 # <legend><?php _e('Content','cb-std-sys'); ?></legend>
@@ -447,7 +450,7 @@ msgstr "Kontakt"
 
 #: ../inc/backend.php:136
 msgid "News"
-msgstr ""
+msgstr "Neuigkeiten"
 
 #: ../inc/backend.php:141
 msgid "The RSS Feed is either empty or unavailable."
@@ -481,7 +484,7 @@ msgstr "Sie arbeiten mit"
 # #remove_meta_box( 'icl_div' , 'post' , 'advanced' );
 # remove_meta_box( 'icl_div_config' , 'post' , 'normal' );
 # }
-#: ../inc/backend.php:512
+#: ../inc/backend.php:512 ../inc/frontend.php:675
 msgid "maintained &amp; designed by"
 msgstr "weiterentwickelt & gestaltet von"
 
@@ -505,7 +508,7 @@ msgid "Best Regards"
 msgstr "Beste Grüße"
 
 #: ../inc/backend.php:589
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Some components need an update. Contact %s, then the things will get done! "
 msgstr ""
@@ -1109,18 +1112,15 @@ msgstr "Suchergebnisse für: %s"
 msgid "Page %s"
 msgstr "Seite %s"
 
+#: ../inc/frontend.php:1030
+#, php-format
+msgid "About %s"
+msgstr "Über %s"
+
 #: ../inc/frontend.php:1035
 #, php-format
 msgid "View Website of %s"
 msgstr "Zeige die Webseite von %s"
-
-# <?php
-# printf(__('<span class="%1$s">By</span> %2$s', 'cb-std-sys'),
-# 'meta-prep meta-prep-author',
-#: ../inc/frontend.php:1040
-#, php-format
-msgid "View all posts by %s"
-msgstr "Zeige alle Beiträge von %s"
 
 #: ../inc/frontend.php:1062 ../inc/frontend.php:1063
 #, php-format
@@ -1143,197 +1143,32 @@ msgstr "Seiten:"
 
 #: ../inc/options.php:129
 msgid "Upload"
-msgstr ""
+msgstr "Hochladen"
 
 # function roots_nice_search_redirect() {
 # if (is_search() && strpos($_SERVER['REQUEST_URI'], '/wp-admin/') === false && strpos($_SERVER['REQUEST_URI'], '/'.__('search','cb-std-sys').'/') === false) {
 # #        wp_redirect(home_url( __('search','cb-std-sys'). '/' . str_replace(array(' ', '%20'), array('+', '+'), urlencode(get_query_var( 's' )))), 301);
-#: ../inc/search.php:94 ../inc/search.php:95 ../inc/search.php:115
+#: ../inc/search.php:95 ../inc/search.php:96 ../inc/search.php:116
 msgid "search"
 msgstr "suche"
 
 # }
 # return _e( 'Or did you mean', 'cb-std-sys' ).' <strong class="spell-suggest">'.$output.'</strong>?';
 # } else {
-#: ../inc/search.php:181
+#: ../inc/search.php:182
 msgid "Or did you mean"
 msgstr "Oder meinten Sie"
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:167
-msgid "Something went wrong."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:180
-#, php-format
-msgid "All plugins installed and activated successfully. %1$s"
-msgstr ""
 
 # <?php if ( ! empty( $post->post_parent ) ) : ?>
 # <p class="page-title"><a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', 'cb-std-sys' ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery"><?php
 # /* translators: %s - title of parent post */
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:515
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:2053
 #, fuzzy
-msgid "Return to the Dashboard"
-msgstr "Zurück zu %s"
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:543
-#, php-format
-msgid "The following plugin was activated successfully: %s."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:702
-msgid "Dismiss this notice"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1086
-msgid "External Link"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1091
-msgid "Private Repository"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1094
-msgid "Pre-Packaged"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1098
-msgid "WordPress Repository"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1101
-msgid "Required"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1101
-msgid "Recommended"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1104
-msgid "Not Installed"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1106
-msgid "Installed But Not Activated"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1276
-#, php-format
-msgid ""
-"No plugins to install or activate. <a href=\"%1$s\" title=\"Return to the "
-"Dashboard\">Return to the Dashboard</a>"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1292
-msgid "Plugin"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1294
-msgid "Type"
-msgstr ""
+#~ msgid "Return to the Dashboard"
+#~ msgstr "Zurück zu %s"
 
 #
 # <tr>
 # <th scope="row"><?php _e('Statistics','cb-std-sys'); ?></th>
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1295
 #, fuzzy
-msgid "Status"
-msgstr "Statistiken"
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1313
-msgid "Install"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1314
-msgid "Activate"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1824
-msgid "Install package not available."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1825
-#, php-format
-msgid "Downloading install package from <span class=\"code\">%s</span>&#8230;"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1826
-msgid "Unpacking the package&#8230;"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1827
-msgid "Installing the plugin&#8230;"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1828
-msgid "Plugin install failed."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1829
-msgid "Plugin installed successfully."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1840
-msgid "Plugin activation failed."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1950
-msgid ""
-"The installation and activation process is starting. This process may take a "
-"while on some hosts, so please be patient."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1951
-#, php-format
-msgid "%1$s installed and activated successfully."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1951
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1960
-msgid "Show Details"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1951
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1960
-msgid "Hide Details"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1952
-msgid "All installations and activations have been completed."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1953
-#, php-format
-msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1957
-msgid ""
-"The installation process is starting. This process may take a while on some "
-"hosts, so please be patient."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1958
-#, php-format
-msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1959
-#, php-format
-msgid "The installation of %1$s failed."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1960
-#, php-format
-msgid "%1$s installed successfully."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1961
-msgid "All installations have been completed."
-msgstr ""
-
-#: ../inc/tgm-plugin-activation/class-tgm-plugin-activation.php:1962
-#, php-format
-msgid "Installing Plugin %1$s (%2$d/%3$d)"
-msgstr ""
+#~ msgid "Status"
+#~ msgstr "Statistiken"
