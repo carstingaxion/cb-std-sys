@@ -3,7 +3,7 @@
 <?php endif; // wrap loop into markup-div ?>
 
 <?php if ( is_active_sidebar( 'primary-widget-area' ) || is_active_sidebar( 'secondary-widget-area' ) ) : ?>
-<aside id="sidebar" role="complementary">
+<aside id="sidebar" role="complementary"<?php echo cbstdsys_add_css_classes_via_filters ( 'sidebar' ); ?>>
 <?php if ( is_active_sidebar( 'primary-widget-area' ) ) : ?>
   <section class="xoxo" id="primary-sidebar">
 <?php dynamic_sidebar( 'primary-widget-area' ); ?>
