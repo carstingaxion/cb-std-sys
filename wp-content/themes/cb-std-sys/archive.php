@@ -37,16 +37,21 @@ get_header(); ?>
 
 		<header>
 			<h1 class="page-title">
-<?php echo get_post_type(); ?>
+
 <?php if ( is_day() ) : ?>
 				<?php printf( __( 'Daily Archives: %s', 'cb-std-sys' ), '<strong>' . get_the_date() . '</strong>' ); ?>
 <?php elseif ( is_month() ) : ?>
 				<?php printf( __( 'Monthly Archives: %s', 'cb-std-sys' ), '<strong>' . get_the_date('F Y') . '</strong>' ); ?>
 <?php elseif ( is_year() ) : ?>
 				<?php printf( __( 'Yearly Archives: %s', 'cb-std-sys' ), '<strong>' . get_the_date('Y') . '</strong>' ); ?>
+<?php elseif ( is_post_type_archive() ) : ?>
+        <?php post_type_archive_title(); ?>
+<?php elseif ( is_tax()  ) : ?>
+				<?php echo get_queried_object()->name; ?>
 <?php else : ?>
 				<?php _e( 'Blog Archives', 'cb-std-sys' ); ?>
 <?php endif; ?>
+
 			</h1>
 		</header>
 
@@ -71,8 +76,20 @@ get_header(); ?>
 	 * If you want to overload this in a child theme then include a file
 	 * called loop-archives.php and that will be used instead.
 	 */
-	 get_template_part( 'loop', 'archive' );
 ?>
+<?php if ( is_day() ) : ?>
+				<?php get_template_part( 'loop', 'archive-day' ); ?>
+<?php elseif ( is_month() ) : ?>
+				<?php get_template_part( 'loop', 'archive-month' ); ?>
+<?php elseif ( is_year() ) : ?>
+				<?php get_template_part( 'loop', 'archive-year' ); ?>
+<?php elseif ( is_post_type_archive() ) : ?>
+				<?php get_template_part( 'loop', 'archive-' . sanitize_html_class( get_post_type() ) ); ?>
+<?php elseif ( is_tax()  ) : ?>
+				<?php get_template_part( 'loop', 'archive-' . sanitize_html_class( get_query_var( 'term' ) ) ); ?>
+<?php else : ?>
+				<?php get_template_part( 'loop', 'archive-blog' ); ?>
+<?php endif; ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
