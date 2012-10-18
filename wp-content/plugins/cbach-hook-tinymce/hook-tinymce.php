@@ -3,17 +3,26 @@
 Plugin Name: Hook TinyMCE
 Plugin URI: 
 Description: 
-Version: 0.0.3
+Version: 0.0.4
 Author: Carsten Bach
 Author URI: http://carsten-bach.de/
 Last Change: 
 
+0.0.4 - 11.10.2012
+  fixed missing icons.gif from wp-includes
+  Added "Definition List" support
+  Added the "safari" Plugin, that fixes many errors for mac-users
+  Removed disabling of flash-uploader; it's unsused in current WP Versions
+  
 0.0.3 - 28.08.2012
   fixed "undefined index" errors
 
 
 0.0.2
 */   
+  	// Setup localization
+  	load_plugin_textdomain( 'cbach-hook-tinymce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
 		$cbstdsys_opts = get_option('cbstdsys_options');
     #$current_user = wp_get_current_user();
 		#echo $current_user;
@@ -67,31 +76,31 @@ Last Change:
     
         $style_formats = array(
             array(
-            	'title' => __('highlight','cb-std-sys'),
+            	'title' => __('highlight','cbach-hook-tinymce'),
             	'inline' => 'span',
             	'classes' => 'highlight',
             	'wrapper' => true
             ),
             array(
-            	'title' => __('dimmed','cb-std-sys'),
+            	'title' => __('dimmed','cbach-hook-tinymce'),
             	'inline' => 'span',
             	'classes' => 'dimmed',
             	'wrapper' => true
             ),
             array(
-            	'title' => __('info','cb-std-sys'),
+            	'title' => __('info','cbach-hook-tinymce'),
             	'block' => 'div',
             	'classes' => 'info',
             	'wrapper' => true
             ),
             array(
-            	'title' => __('memo','cb-std-sys'),
+            	'title' => __('memo','cbach-hook-tinymce'),
             	'block' => 'div',
             	'classes' => 'memo',
             	'wrapper' => true
             ),
             array(
-            	'title' => __('important','cb-std-sys'),
+            	'title' => __('important','cbach-hook-tinymce'),
             	'block' => 'div',
             	'classes' => 'important',
             	'wrapper' => true
@@ -125,7 +134,10 @@ Last Change:
           'table',
           'visualchars',
           'mailto',
-          'nonbreaking'
+          'nonbreaking',
+          'advlist',
+          'safari',
+//          'definitionlist'
         );
         foreach( $external_plugins as $v ) {
             $new_plugin_array[$v] = plugins_url( '/tinymce/'.$v.'/editor_plugin.js', __FILE__ );
@@ -145,7 +157,11 @@ Last Change:
           'abbr',
           '|',
           'bullist', 
-          'numlist',    
+          'numlist',
+          'definitionlist',              
+          '|',
+          'outdent', 
+          'indent',  
           '|', 
           'link', 
           'anchor',
@@ -228,5 +244,5 @@ Last Change:
      *  @since  0.0.1
      *  
      */
-     add_filter('flash_uploader', create_function('$flash', 'return false;'));                        
+#     add_filter('flash_uploader', create_function('$flash', 'return false;'));                        
 ?>
