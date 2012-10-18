@@ -29,7 +29,7 @@
               if (empty($excerpt) || empty($search)) {
                 return null;
               }
-            
+                     
               /* Suchwörter */
               $keywords = explode(' ', $search);
               $keyword = $keywords[0];
@@ -41,7 +41,7 @@
               if (strlen($excerpt) <= $length) { echo preg_replace( '/((<[^>]*)|'.implode('|', $keywords). ')/ieu', '"\2"=="\1"? "\1":"<strong class=\'search-phrase\'>\1</strong>"', $excerpt  );
                  return null;
               }
-            
+                
               /* Init */
               $break = '[sm]';
               $diff = round(($length - strlen($keyword)) / 2);
@@ -69,9 +69,9 @@
               
               /* whitespace, leerzeichen und leere Zeilen löschen */
                $data = trim( strip_tags( $data,"\x22\x27\n" ));
-            
+               
               /* Ausgeben */
-              return sprintf( '<p>&hellip; %s &hellip;</p>', preg_replace( '/((<[^>]*)|' .implode('|', $keywords). ')/ieu', '"\2"=="\1"? "\1":"<strong class=\'search-phrase\'>\1</strong>"', $data ) );
+              return sprintf( '&hellip; %s &hellip;', preg_replace( '/((<[^>]*)|' .implode('|', $keywords). ')/ieu', '"\2"=="\1"? "\1":"<strong class=\'search-phrase\'>\1</strong>"', $data ) );
               
           } else {
               
@@ -80,8 +80,9 @@
           }
         }
         add_filter('the_excerpt','the_search_excerpt');
-        
-            
+        add_filter('get_the_excerpt','the_search_excerpt');
+        add_filter('get_the_content','the_search_excerpt');            
+#        add_filter('the_content','the_search_excerpt');
 
         /**
          *  Redirect /?s= to /search
