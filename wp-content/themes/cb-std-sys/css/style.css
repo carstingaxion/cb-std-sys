@@ -39,12 +39,13 @@ html { overflow-y: scroll; }
 
 a:hover, a:active { outline: none; }
 a:active, input[type=submit]:active{ outline: 0; position: relative; top: 1px; }
+/*
 #content .entry-content a[href^="http"]:before { content: "→ "; }
 #content .entry-content a[href^="http"]:hover:after, #content .entry-content a[href^="http"]:focus:after{ content:" (extern)";}
 #content .entry-content a[href^="http://assets"]:before { content: ""; }
 #content .entry-content a[href^="http://assets"]:hover:after, 
 #content .entry-content a[href^="http://assets"]:focus:after{ content:"";}
-
+*/
 ul, ol, dl { margin: 0 0 1em 2em; }
 ol { list-style-type: decimal; }
 nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
@@ -82,19 +83,6 @@ button::-moz-focus-inner { padding:0; border:0; }
 #ie-message { float:right; width: 60%; margin-right:2%; margin-left:0;}
 
 
-/* =========================  GENERIC PSEUDOS to choose via TINYMCE (copy from eitor-style.css) ========================= */
-.highlight, .comment-awaiting-moderation { color:#c30; }
-.dimmed { color:#888; }
-.info, .memo, .important, .error, .wpcf7-not-valid-tip, .wpcf7-validation-errors,
-.wpcf7-spam-blocked, .wpcf7-not-valid-tip-no-ajax, .success, .wpcf7-mail-sent-ok{padding:10px; margin-bottom:1em;}
-.info { background:#f8f8f8; color:#666; font-size:91.7%; }
-.memo, .success, .wpcf7-mail-sent-ok { background:#efe; color:#040; border:2px #484 solid;  }
-.important { background:#ffe; color:#440; border:2px #884 solid; }
-.error, .wpcf7-not-valid-tip, .wpcf7-validation-errors, .wpcf7-spam-blocked, .wpcf7-not-valid-tip-no-ajax
-{background:#fee; color:#400; border:2px #844 solid; }
-.highlight *, .dimmed *, .info *, .memo *, .important *{  background-color: transparent!important;}
-
-
 /* =========================  COLOURS  ========================= */
 ::-moz-selection{ background: #FF5E99; color:#fff; }
 ::selection { background:#FF5E99; color:#fff; }
@@ -119,7 +107,6 @@ h5 { font-size:116.67%; }                    /* 14px */
 h6 { font-size:116.67%; }                    /* 14px */
 
 p { line-height:1.5em; margin:0 0 1em 0; }
-.amp {font:italic 1.25em/1em "Goudy Old Style",Baskerville,"Palatino Linotype",Palatino,Constantia,Georgia,'Book Antiqua','Times New Roman',serif;position: relative;top:.1em;}
 
 /* =========================MAIN CONTENT========================= */
 img,
@@ -132,31 +119,12 @@ figure {
   max-width: 100%;
 }
 
-#content blockquote,
-#content q,
-#content cite{
+blockquote,
+q,
+cite{
     font-style: italic;
     margin:.5em 2em;
 }
-
-
-/**
- *	MOVED TO tiny-content-elements.css in childtheme
- *
- *
-a[href$=".pdf"]{
-    background:transparent url("../img/pdf.gif") no-repeat 10px 50%;
-    text-decoration: none;
-    padding:10px 10px 10px 35px;
-}
-
-a[href$=".pdf"]:hover,
-a[href$=".pdf"]:focus,
-a[href$=".pdf"]:active{
-    text-decoration: underline;
-    outline:1px solid #659594;
-}
-*/
 
 /* =========================FOOTER========================= */
 footer {
@@ -236,7 +204,7 @@ nav.pagination a[rel="next"]{ float:right;}
 
 /* =========================HTML5 BOILERPLATE HELPER CLASSES=========================*/
 .social-imr, .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
-.hidden, .wpcf7-display-none { display: none; visibility: hidden; }
+.hidden, .wpcf7-display-none { display: none; }
 .visuallyhidden, .logged-in .social-label { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
@@ -329,4 +297,5 @@ a.editlink{display:inline!important;width:auto!important;height:auto!important;f
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
+  nav, #sidebar {display:none;}
 }
