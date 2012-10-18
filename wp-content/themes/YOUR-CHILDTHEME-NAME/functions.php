@@ -55,6 +55,7 @@
 		function childtheme_sidebars_init() {
 			  return $sidebars = array(
 			      array(__( 'Primary Widget Area', 'cb-std-sys' ),'primary-widget-area', __( 'The primary widget area', 'cb-std-sys' )),
+            array(__( 'Secondary Widget Area', 'cb-std-sys' ),'secondary-widget-area', __( 'The secondary widget area', 'cb-std-sys' )),
 			  );
 		}
 		#add_filter( 'cbstdsys_sidebars_init', 'childtheme_sidebars_init' );
@@ -70,13 +71,54 @@
     function custom_thumbnail_setup () {
     		// Array of custom image sizes to add
     		$custom_thumbnail_sizes = array(
-    				array( 'name'=>'hero-full-width', 'width'=>954, 'height'=>517, 'crop'=>true ),
-    				array( 'name'=>'hero-mini', 'width'=>53, 'height'=>40, 'crop'=>true ),
+    				array( 'name'=>'campaign-full', 'width'=>1260, 'height'=>488, 'crop'=>true ),
+    				array( 'name'=>'campaign-medium', 'width'=>626, 'height'=>190, 'crop'=>true ),
     		);
     		return $custom_thumbnail_sizes;
     }
      */	
   
+
+
+
+    /**
+     *  Postthumbnail Definitions
+     *
+     *  - define post_thumbnail size
+     *  - define if standard sizes should be cropped
+     *  - get custom_thumbnail-sizes and update their options
+     *
+     *  @since  0.1.3
+     *  @source http://wordpress.org/support/topic/hack-crop-custom-thumbnail-sizes?replies=17#post-2041676
+     */
+		function thumbnail_setup () {
+				// define post_thumbnail size
+				set_post_thumbnail_size( '100', '100', true );
+
+				// define all post_types, which use thumbnails
+				add_theme_support('post-thumbnails' );
+
+				// define if standard sizes should be cropped
+				// http://wordpress.org/support/topic/force-crop-to-medium-size
+			  if(false === get_option("medium_crop")) add_option("medium_crop", "1");
+			  else                                    update_option("medium_crop", "1");
+
+				// get custom_thumbnail-sizes ...
+				$custom_thumbnail_sizes =  custom_thumbnail_setup();
+
+				// ... and update their options
+				// For each new image size, run add_image_size() and update_option() to add the necessary info.
+				// update_option() is good because it only updates the database if the value has changed. It also adds the option if it doesn't exist
+				foreach ( $custom_thumbnail_sizes as $custom_thumbnail_size ){
+						add_image_size( $custom_thumbnail_size['name'], $custom_thumbnail_size['width'], $custom_thumbnail_size['height'], $custom_thumbnail_size['crop'] );
+						update_option( $custom_thumbnail_size['name']."_size_w", $custom_thumbnail_size['width'] );
+						update_option( $custom_thumbnail_size['name']."_size_h", $custom_thumbnail_size['height'] );
+						update_option( $custom_thumbnail_size['name']."_crop", $custom_thumbnail_size['crop'] );
+				}
+		}
+		add_action( 'after_setup_theme', 'thumbnail_setup' );
+
+
   
   	/**
   	 *  Add childtheme scripts
@@ -86,16 +128,28 @@
   	function add_childtheme_scripts ( ) {
         
         /**
+         *  Construct corret URIs for use with 'BWP-Minify'-PLugin
+         *
+         *  @since  0.1.2
+         */
+        $bwp_minify_plugins_url_addon = $bwp_minify_themes_url_addon 	= ''; 
+        if ( class_exists('BWP_MINIFY') ) {
+						$bwp_minify_plugins_url_addon = WP_CONTENT_URL;
+						$bwp_minify_themes_url_addon 	= WP_CONTENT_URL.str_replace( WP_CONTENT_DIR, '', TEMPLATEPATH );
+				}
+
+
+        /**
          *  Load jQuery via Google CDN
          *  and fallback to local version
          *
          *  @since 0.1.2
          */
-				$jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js';
+				$jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js';
 				if ( !fopen($jquery, 'r') ) {
-      	   $jquery = '/js/libs/jquery-1.6.4.min.js';
+      	$jquery = $bwp_minify_themes_url_addon.'/js/libs/jquery-1.8.1.min.js';
 				}
-        $jquery_ver = '1.6.4';    
+        $jquery_ver = '1.8.1';  
         wp_enqueue_script('jquery', $jquery, false, $jquery_ver, true);
         
         /**
@@ -114,7 +168,7 @@
          *  Load threaded comments reply
          */          
         if ( is_single()  && get_option( 'thread_comments' ) )
-				    wp_enqueue_script( 'comment-reply' );
+				    wp_enqueue_script( 'comment-reply' );        
   	}
   	#add_action('wp_head', 'add_childtheme_scripts');
 
@@ -371,18 +425,14 @@ if ( is_admin() ) {
     	header( 'Content-Type: text/plain; charset=utf-8' );
     ?>
     /* TEAM */
-        Web Designer: 
+        Web Design:   
         Contact via : 
-        Twitter: 
-        From:
+        From:         
         
-        Programmer: 
-        Contact via : 
-        Twitter: 
-        From:
-    
-    /* THANKS */
-        Name:
+        Programming:  Carsten Bach
+        Contact via : http://carsten-bach.de
+        Twitter:      @carstenbach
+        From:         Stuttgart, Baden-Würrtemberg, Germany
     
     /* SITE */
         Last update: <?php echo mysql2date('l, d.m.Y H:i:s', get_lastpostmodified('GMT'), false)."\n"; ?>
