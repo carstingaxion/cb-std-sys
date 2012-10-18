@@ -301,7 +301,7 @@
         // http://wordpress.stackexchange.com/questions/1567/best-collection-of-code-for-your-functions-php-file/9990#9990
 		    if (is_page()) {
 		        if ($post->post_parent) {
-		            $parent  = end(get_post_ancestors($current_page_id));
+		            $parent  = end(get_post_ancestors($post->ID));
 		        } else {
 		            $parent = $post->ID;
 		        }
@@ -521,10 +521,10 @@
         $content = str_replace($current_path, $new_path, $content);
         return $content;
     }
-		#if (!class_exists('BWP_MINIFY')) {
+		if (!class_exists('BWP_MINIFY')) {
 		    add_filter('plugins_url', 'clean_plugins_path');
 		    add_filter('bloginfo', 'clean_plugins_path');
-    #}
+    }
 
 
 
