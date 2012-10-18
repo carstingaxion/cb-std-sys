@@ -611,14 +611,42 @@ function webdev_partner_rss_dashboard_widget() {
      *  @since    0.0.2
      *  
      */
-		function admin_css_js () {
+		function admin_css () {
 		    wp_enqueue_style( 'cb_std_sys_admin_styles',  '/css/cb_std_sys_admin.css', false, CB_STD_SYS_VERSION );
+		}
+		add_action( 'admin_head','admin_css' );
+		
+    
+    /**
+     *  add admin stylesheet and scripts
+     *  
+     *  @since    0.0.2
+     *  
+     */
+		function admin_js () {
 		    wp_enqueue_script( 'cb_std_sys_admin_js',  '/js/cbstdsys_admin.js', array('jquery'), CB_STD_SYS_VERSION, true );
 		}
-		add_action( 'admin_head','admin_css_js' );
-		
-		
-		
+		add_action( 'admin_enqueue_scripts','admin_js' );  
+    
+    
+      
+		/**
+		 *  Add jQuery PHP vars to be used in cb-std-sys-admin.js
+		 *
+		 *  @since  0.2.1
+		 */
+		function admin_js_vars ( ) {
+        
+        $admin_js_vars = array(
+          'excerpt_length'      => apply_filters( 'excerpt_length', 55 ),
+          'i18n_wordcount'     =>__( 'Word count:', 'cb-std-sys' ),
+        );
+        
+	 			wp_localize_script( 'cb_std_sys_admin_js', 'cbstdsys_admin_js_vars', $admin_js_vars );
+		}
+		add_action( 'admin_print_scripts', 'admin_js_vars' );		
+    
+    
 		/**
 		 *  Add jQuery Quicktags to textwidgets to make editing easier
 		 *
