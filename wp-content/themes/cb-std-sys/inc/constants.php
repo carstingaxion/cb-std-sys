@@ -5,7 +5,7 @@ if ( file_exists( WP_CHILD_DIR . '/inc/constants.php' ) ) {
 }
 
  // @todo manually set this in style.css
-define('CB_STD_SYS_VERSION','0.2.1');
+define('CB_STD_SYS_VERSION','0.2.2');
 
 
 if(!defined('CBSTDSYS_SUPER_ADMIN_EMAIL'))
