@@ -283,7 +283,7 @@ wp_enqueue_script( 'jquery' );
          *  @since    0.1.8
          */                                            
         function main_query_script_and_style_loader( $query ) {
-            if ( $query->is_main_query() )
+            if ( $query->is_main_query() || is_preview() )
         				add_filter( 'the_posts', 'cond_load_js_and_css', 100 ); // the_posts gets triggered before wp_head
             else
         				remove_filter( 'the_posts', 'cond_load_js_and_css', 100 ); // the_posts gets triggered before wp_head                
