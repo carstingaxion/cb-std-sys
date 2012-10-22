@@ -57,7 +57,16 @@ function jl_brd_dashboard_recent_drafts( $drafts = false ) {
 			$item .= ' - <span class="post-state"><span class="' . strtolower( str_replace( ' ', '-', $draft->post_status ) ) . '">' . $post_status . '</span></span>';
 			$obj = get_post_type_object( $draft->post_type );
 			$item .= '   <small>' . $obj->labels->singular_name . '</small>';
-			$item .= '<abbr class="howto alignright" title="' . sprintf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $draft->post_modified), mysql2date(get_option('time_format'), $draft->post_modified)) . '">' . mysql2date(get_option('date_format'), $draft->post_modified) . ', ' . mysql2date(get_option('time_format'), $draft->post_modified) . '</abbr></h4>';
+			$item .= '<abbr class="howto alignright" title="' . 
+          sprintf(
+              __('Last edited by %1$s on %2$s at %3$s'), 
+              esc_html( $last_user->display_name ), 
+              mysql2date( get_option('date_format'), $draft->post_modified ), 
+              mysql2date( get_option('time_format'), $draft->post_modified )
+          ) . '">' . 
+          mysql2date(get_option('date_format'), $draft->post_modified) . ', ' . 
+          mysql2date(get_option('time_format'), $draft->post_modified) . '</abbr></h4>';
+          
 			if ( $the_content = preg_split( '#\s#', strip_shortcodes(strip_tags( $draft->post_content ), 11, PREG_SPLIT_NO_EMPTY )) )
 				$item .= '<p style="padding-left:10px;">' . join( ' ', array_slice( $the_content, 0, 10 ) ) . ( 10 < count( $the_content ) ? '&hellip;' : '' ) . '</p>';
 			// http://old.nabble.com/Passing-arguments-to-current_user_can()-function-td31716337.html
