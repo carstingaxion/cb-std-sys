@@ -258,7 +258,7 @@ function webdev_partner_rss_dashboard_widget() {
      */                    
     function remove_menus () {
         global $menu, $submenu, $current_user;
-
+#echo '<pre>';var_dump($submenu);echo '</pre>';
         // Remove 'Posts'
         if ( ! cbstdsys_opts('m_blog') )
         unset($menu[multidimensional_search( $menu, array( 2 =>'edit.php') )]);
@@ -323,8 +323,10 @@ function webdev_partner_rss_dashboard_widget() {
         		unset($menu[multidimensional_search( $menu, array( 2 =>'backwpup') )]);
             
             // Removes 'Updates' and duplicated submenu "Home"
-            unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'update-core.php') )]);
-            unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'index.php') )]);
+            if ( current_user_can('manage_options') ) {
+                unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'update-core.php') )]);
+                unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'index.php') )]);
+            }
             
             // Removes 'Themes'.
             unset($submenu['themes.php'][multidimensional_search( $submenu['themes.php'], array( 2 =>'themes.php') )]);
