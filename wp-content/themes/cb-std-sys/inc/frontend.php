@@ -1125,7 +1125,7 @@
 		 *  @since  0.1.4
 		 */
 		function backtotop_link() {
-        global $pagenow;
+        $pagenow = site_url( $_SERVER['REQUEST_URI'] );
 				return "\n<a href='". $pagenow ."#top'  class='backtotop visuallyhidden focusable' title='" .__('back to top','cb-std-sys') ."'>". __('back to top','cb-std-sys') ."</a>\n";
 		}
 
@@ -1606,4 +1606,23 @@ add_action( 'get_search_form', 'do_use_echo_on_get_search_form' );
 			   { return $html; }
 		}
 		add_filter( 'embed_oembed_html', 'add_video_wmode_transparent', 10, 3);
+    
+    
+    
+    /**
+     *  Add Schema.org itemprop=keywords to get_the_term_list()
+     *  
+     *  @since  2.2
+     *  @see    http://core.trac.wordpress.org/browser/tags/3.4.2/wp-includes/category-template.php#L1115     
+     *  
+     */
+    function add_schema_org_keywords ( $term_links ) {
+        $new_term_links = array();
+        foreach ( $term_links as $term_link ) {
+            $new_term_link = str_replace ( 'tag">', 'tag"><span itemprop="keyword">', $term_link );
+            $new_term_links[] = str_replace ( '</a>', '</span></a>', $new_term_link );                    
+        }
+        return $new_term_links;
+    }
+    add_filter( 'term_links-post_tag', 'add_schema_org_keywords' );                        
 ?>
