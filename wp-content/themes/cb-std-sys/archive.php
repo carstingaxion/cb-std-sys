@@ -84,9 +84,9 @@ get_header(); ?>
 <?php elseif ( is_year() ) : ?>
 				<?php get_template_part( 'loop', 'archive-year' ); ?>
 <?php elseif ( is_post_type_archive() ) : ?>
-				<?php get_template_part( 'loop', 'archive-' . sanitize_html_class( get_post_type() ) ); ?>
+				<?php get_template_part( 'loop-posttype-archive', sanitize_html_class( get_post_type() ) ); ?>
 <?php elseif ( is_tax()  ) : ?>
-				<?php get_template_part( 'loop', 'archive-' . sanitize_html_class( get_query_var( 'term' ) ) ); ?>
+				<?php get_template_part( 'loop-taxonomy-archive', sanitize_html_class( get_query_var( 'term' ) ) ); ?>
 <?php else : ?>
 				<?php get_template_part( 'loop', 'archive-blog' ); ?>
 <?php endif; ?>
