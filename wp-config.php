@@ -38,9 +38,11 @@ define('WP_MEMORY_LIMIT', '72M');
 if ( defined( 'WP_LOCAL_DEV' ) ){
 		$abs_path = 'ENTER-THE-LOCAL-ABSPATH-HERE';
 		$url_path = 'http://www.ENTER-THE-LOCAL-URL-HERE';
+    define( 'COOKIE_DOMAIN', 'www.ENTER-THE-LOCAL-URL-HERE');
 } else {
 		$abs_path = 'ENTER-THE-LIVE-ABSPATH-HERE';
 		$url_path = 'http://www.ENTER-THE-LIVE-URL-HERE';
+    define( 'COOKIE_DOMAIN', 'www.ENTER-THE-LIVE-URL-HERE');
 }
 
 define('WP_HOME', $url_path);  
@@ -184,13 +186,15 @@ define( 'WP_DEBUG_LOG', true);
  *    
  *  USE ONLY in PHP 5.3 or higher
  */  
-#define('E_DEPRECATED', true); 
+if ( constant( 'WP_DEBUG' ) )  
+    define('E_DEPRECATED', true);  
 
 
 /**
  *  The WordPress database class can be told to store query history
- */   
-define( 'SAVEQUERIES', true );
+ */
+if ( constant( 'WP_DEBUG' ) ) 
+    define( 'SAVEQUERIES', true );
 
 
 
