@@ -307,8 +307,28 @@ function remove_more_jump_link($link) {
 add_filter('the_content_more_link', 'remove_more_jump_link');
 
 
+// an eine neue option hängen, genau wir für die tags
+    /**
+     * Remove built in "category" - taxonomy
+     *         
+     * @author   Franz Josef Kaiser
+     * @source   https://gist.github.com/870890 
+     */
+    function unregister_category_taxonomy( $taxonomy ) {
+    		global $wp_taxonomies;
+    		foreach ( $wp_taxonomies as $tax => $data )	{
+      			// Only deal with _builtin taxonomies
+      			if ( $data->_builtin === true && $tax == 'category' ) {
+      				  // Now let's unset "category"
+      					// Check to be sure if we're dealing with the right one
+      					unset( $wp_taxonomies[$tax] );
+      			}
+    		}
+    }
+    // Remove default taxonomy of post "categories"
+    add_action( 'init', array( &$this, 'unregister_category_taxonomy' ) );  
 
-
+    
 
 
  
