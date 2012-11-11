@@ -255,7 +255,10 @@ wp_enqueue_script( 'jquery' );
 
 		            wp_enqueue_script('jquery', $jquery, false, $jquery_ver, true);
 								wpcf7_enqueue_scripts();
-
+				        
+                wp_enqueue_script( 'std_script', $std_script_path, array('jquery'), CB_STD_SYS_VERSION,  true );
+				        wp_localize_script( 'std_script', 'std_script', $std_script_i18n );
+                
 		            wp_enqueue_script('jq_resize_textarea', $jq_resize_textarea, array('jquery'),false, true);
 
 		            wp_enqueue_style( 'forms-css', $forms_css, false, CB_STD_SYS_VERSION );
@@ -269,7 +272,7 @@ wp_enqueue_script( 'jquery' );
 		            wp_enqueue_script('schema_org_debug_lib', $schema_org_debug_lib, array('jquery'),false, true);
 		            wp_enqueue_script('schema_org_debug', $schema_org_debug, array('jquery','schema_org_debug_lib'),false, true);
 						}
-*/
+ */
 		        return $post;
 		    }
 
@@ -599,27 +602,64 @@ wp_enqueue_script( 'jquery' );
 		 */
 		if ( ! function_exists( 'cbstdsys_posted_in' ) ) :
 				function cbstdsys_posted_in() {
-						$tag_list = get_the_tag_list( '', ', ' );
+            global $post;
+
 						// we don't need the permalink on archives or search pages
             if ( !is_archive() && !is_search() ) {
 								$bookmark = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark" itemprop="url">permalink</a>.', 'cb-std-sys' );
 						}
+            
+            // default posts
+						if ( 'post' == get_post_type() ) {
+            
+                $tag_list = get_the_tag_list( '', ', ' );
+    						if ( $tag_list && cbstdsys_opts('m_tags') ) {
+    								$posted_in = __( 'This entry was posted in %1$s and tagged %2$s.', 'cb-std-sys' ).' '.$bookmark;
+    						} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) && cbstdsys_opts('m_blog') ) {
+    								$posted_in = __( 'This entry was posted in %1$s.', 'cb-std-sys' ).' '.$bookmark;
+    						} else {
+    								$posted_in = $bookmark;
+    						}
+                
+    						// Prints the string, replacing the placeholders.
+    						printf(
+    							'<p class="posted-in">'.$posted_in.'</p>',
+    							get_the_category_list( ', ' ),
+    							$tag_list,
+    							get_permalink(),
+    							the_title_attribute( 'echo=0' )
+    						);    
+                    
+            // any custom post_type
+            } else {
 
-						if ( $tag_list && cbstdsys_opts('m_tags') ) {
-								$posted_in = __( 'This entry was posted in %1$s and tagged %2$s.', 'cb-std-sys' ).' '.$bookmark;
-						} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) && cbstdsys_opts('m_blog') ) {
-								$posted_in = __( 'This entry was posted in %1$s.', 'cb-std-sys' ).' '.$bookmark;
-						} else {
-								$posted_in = $bookmark;
-						}
-						// Prints the string, replacing the placeholders.
-						printf(
-							'<p class="posted-in">'.$posted_in.'</p>',
-							get_the_category_list( ', ' ),
-							$tag_list,
-							get_permalink(),
-							the_title_attribute( 'echo=0' )
-						);
+    						// Get all the taxonomies for this post type
+                $taxonomies = get_object_taxonomies( (object) array( 'post_type' => get_post_type() ) );
+                
+                $tax_list = '';
+                foreach( $taxonomies as $taxonomy ) {
+                        $tax_list .= get_the_term_list( $post->ID, $taxonomy, '', ', ', '' );
+                }
+                
+                if ( !empty( $tax_list ) ) {
+    								$posted_in = __( 'This %5$s-entry was posted in %1$s.', 'cb-std-sys' ).' '.$bookmark;
+    						} else {
+    								$posted_in = $bookmark;
+    						}
+                
+    						// Prints the string, replacing the placeholders.
+    						printf(
+    							'<p class="posted-in">'.$posted_in.'</p>',
+    							$tax_list,
+                  '',
+    							get_permalink(),
+    							the_title_attribute( 'echo=0' ),
+                  get_post_type_object( get_post_type( $post ))->label
+    						);                
+            
+            }
+            
+
 				}
 		endif;
 
