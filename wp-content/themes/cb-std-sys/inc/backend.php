@@ -59,8 +59,51 @@
 				*/
 	
     }
-
     add_action('wp_dashboard_setup', 'cleanup_dashboard_widgets' );
+
+
+
+    /**
+     *  Add custom post_types to right-now-widget
+     *  
+     *  @source http://wpsnipp.com/index.php/functions-php/include-custom-post-types-in-right-now-admin-dashboard-widget/
+     *  @since  0.2.2
+     */      
+    function wph_right_now_content_table_end() {
+        $args = array(
+            'public' => true ,
+            '_builtin' => false
+        );
+        $output = 'object';
+        $operator = 'and';
+        $post_types = get_post_types( $args , $output , $operator );
+        foreach( $post_types as $post_type ) {
+            $num_posts = wp_count_posts( $post_type->name );
+            $num = number_format_i18n( $num_posts->publish );
+            $text = _n( $post_type->labels->singular_name, $post_type->labels->name , intval( $num_posts->publish ) );
+            if ( current_user_can( 'edit_posts' ) ) {
+                $num = "<a href='edit.php?post_type=$post_type->name'>$num</a>";
+                $text = "<a href='edit.php?post_type=$post_type->name'>$text</a>";
+            }
+            echo '<tr><td class="first b b-' . $post_type->name . '">' . $num . '</td>';
+            echo '<td class="t ' . $post_type->name . '">' . $text . '</td></tr>';
+        }
+        $taxonomies = get_taxonomies( $args , $output , $operator );
+        foreach( $taxonomies as $taxonomy ) {
+            $num_terms  = wp_count_terms( $taxonomy->name );
+            $num = number_format_i18n( $num_terms );
+            $text = _n( $taxonomy->labels->singular_name, $taxonomy->labels->name , intval( $num_terms ));
+            if ( current_user_can( 'manage_categories' ) ) {
+                $num = "<a href='edit-tags.php?taxonomy=$taxonomy->name'>$num</a>";
+                $text = "<a href='edit-tags.php?taxonomy=$taxonomy->name'>$text</a>";
+            }
+            echo '<tr><td class="first b b-' . $taxonomy->name . '">' . $num . '</td>';
+            echo '<td class="t ' . $taxonomy->name . '">' . $text . '</td></tr>';
+        }
+    }
+    add_action( 'right_now_content_table_end' , 'wph_right_now_content_table_end' );
+
+
 
 function rearrange_dashboard_widgets ( $wp_dashboard_widgets ) {
         global $wp_meta_boxes, $current_user;
@@ -258,7 +301,7 @@ function webdev_partner_rss_dashboard_widget() {
      */                    
     function remove_menus () {
         global $menu, $submenu, $current_user;
-#echo '<pre>';var_dump($submenu);echo '</pre>';
+
         // Remove 'Posts'
         if ( ! cbstdsys_opts('m_blog') )
         unset($menu[multidimensional_search( $menu, array( 2 =>'edit.php') )]);
@@ -323,10 +366,8 @@ function webdev_partner_rss_dashboard_widget() {
         		unset($menu[multidimensional_search( $menu, array( 2 =>'backwpup') )]);
             
             // Removes 'Updates' and duplicated submenu "Home"
-            if ( current_user_can('manage_options') ) {
-                unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'update-core.php') )]);
-                unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'index.php') )]);
-            }
+            unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'update-core.php') )]);
+            unset($submenu['index.php'][multidimensional_search( $submenu['index.php'], array( 2 =>'index.php') )]);
             
             // Removes 'Themes'.
             unset($submenu['themes.php'][multidimensional_search( $submenu['themes.php'], array( 2 =>'themes.php') )]);
@@ -647,8 +688,9 @@ function webdev_partner_rss_dashboard_widget() {
 	 			wp_localize_script( 'cb_std_sys_admin_js', 'cbstdsys_admin_js_vars', $admin_js_vars );
 		}
 		add_action( 'admin_print_scripts', 'admin_js_vars' );		
-    
-    
+  
+		
+		
 		/**
 		 *  Add jQuery Quicktags to textwidgets to make editing easier
 		 *
@@ -724,10 +766,10 @@ function webdev_partner_rss_dashboard_widget() {
      *  
      */          
     function cbstdsys_manage_columns ( $cols ) {
-        if ( current_theme_supports( 'post-thumbnails' ) ) {  
+        if ( post_type_supports( get_current_screen()->post_type, 'thumbnail' ) ) {
             $cols['thumbnail'] = __('Image');
         }
-        
+
         if ( ! cbstdsys_opts('m_tags') ) {
            unset( $cols['tags'] );
         }
@@ -748,7 +790,7 @@ function webdev_partner_rss_dashboard_widget() {
      *  @since    0.0.6
      */
     function cbstdsys_AddThumbValue($column_name, $post_id) {
-        if ( current_theme_supports( 'post-thumbnails' ) ) {  
+        if ( post_type_supports( get_current_screen()->post_type, 'thumbnail' ) ) {  
             $width = (int) 35;
             $height = (int) 35;
             if ( 'thumbnail' == $column_name ) {
@@ -812,7 +854,7 @@ function webdev_partner_rss_dashboard_widget() {
 				unlink($uploaded_image_location);
 
 				// rename the large image
-        			// trim all pathes to make sure, we don't have any specials chars arround
+        // trim all pathes to make sure, we don't have any specials chars arround
 				rename( trim( $large_image_location ), trim( $uploaded_image_location ) );
 
 				// update image metadata and return them
@@ -1024,5 +1066,75 @@ $Toscho_Media_Artist = new Toscho_Media_Artist(
         return $html;
     }
     add_filter( 'image_send_to_editor', 'cbstdsys_add_class_to_linked_images', 10, 3 );
+    
+    
+    /**
+     *  Add a quickedit field to the page list
+     *  to create a child-page on the fly
+     *  
+     *  @source   http://sltaylor.co.uk/blog/easy-child-page-creation-wordpress/
+     *  @since    0.2.2
+     *  
+     */        
+    function cbstdsys_child_page_action( $actions, $page ) {  
+        $actions["create-child"] = '<a href="' . add_query_arg( array( 'post_type' => 'page', 'parent_id' => $page->ID ), admin_url( 'post-new.php') ) . '" title="' . esc_attr__( 'Create a new page with this page as its parent', 'cb-std-sys' ) . '">' . __( 'Create child-page', 'cb-std-sys' ) . '</a>';  
+        return $actions;      
+    }
+    add_filter( 'page_row_actions', 'cbstdsys_child_page_action', 10, 2 );  
+      
+    function cbstdsys_set_child_page() {  
+        global $post;  
+        if ( $post->post_type == "page" && $post->post_parent == 0 && isset( $_GET["parent_id"] ) && is_numeric( $_GET["parent_id"] ) )  
+            echo '<script type="text/javascript">jQuery( document ).ready( function($) { $("#parent_id").val("' . $_GET["parent_id"] . '"); } );</script>';  
+    }     
+    add_action( 'edit_page_form', 'cbstdsys_set_child_page' );
+
+
+
+
+/**
+ *  Modify the User Search in Admin to include firstname, lastname and display_name
+ *  
+ *  @source   http://wordpressapi.com/2012/09/26/wordpress-user-search-firstname-lastname-display-code/
+ *  @since    0.2.2
+ *  
+ */   
+function wpapi_pre_user_query( $user_search ) {
+    global $wpdb;
+
+    $vars = $user_search->query_vars;
+    if ( !is_null( $vars['search'] ) ) {
+        # For some reason, the search term is enclosed in asterisks.
+        #Remove them 
+        $search = preg_replace('/^\*/', '', $vars['search']);
+        $search = preg_replace('/\*$/', '', $search);
+        
+        # search in display name
+        if( !empty( $search ) ){
+            $user_search->query_where = substr(trim($user_search->query_where), 0, -1) . " OR display_name LIKE '%". $search . "%')";
+        }
+        # search in first name
+        $user_search->query_from .= " INNER JOIN {$wpdb->usermeta} m1 ON " .
+        "{$wpdb->users}.ID=m1.user_id AND (m1.meta_key='first_name')";
+        
+        # search in last name
+        $user_search->query_from .= " INNER JOIN {$wpdb->usermeta} m2 ON " .
+        "{$wpdb->users}.ID=m2.user_id AND (m2.meta_key='last_name')";
+        
+        # prepare new SQl statement
+        $names_where = $wpdb->prepare("m1.meta_value LIKE '%s' OR m2.meta_value LIKE '%s'", "%{$search}%", "%$search%");
+        $user_search->query_where = str_replace('WHERE 1=1 AND (', "WHERE 1=1 AND ({$names_where} OR ", $user_search->query_where);
+    }
+    return $user_search;
+}
+add_action( 'pre_user_query', 'wpapi_pre_user_query' );
+
+
+
+
+
+
+
+
 
 ?>
