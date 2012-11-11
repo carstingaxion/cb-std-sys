@@ -1339,7 +1339,7 @@
 		 *  @return   string    cleaned html
 		 *
 		 *  @since    0.1.8
-		 */
+
 		if ( !is_feed() &&  (! defined('DOING_AJAX') || ( defined('DOING_AJAX') && ! DOING_AJAX ) ) ) {
 		    ob_start( 'html5_slash_fixer' );
 		    add_action( 'shutdown', 'html5_slash_fixer_flush' );
@@ -1353,7 +1353,8 @@
 		    #ob_end_flush();
         ob_get_clean();
 		}
-		
+		 */	
+     	
 
 		/**
 		 *  Disable Attachement-Pages
