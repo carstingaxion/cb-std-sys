@@ -73,6 +73,7 @@
         $args = array(
             'public' => true ,
             '_builtin' => false
+            'show_ui' => true,
         );
         $output = 'object';
         $operator = 'and';
