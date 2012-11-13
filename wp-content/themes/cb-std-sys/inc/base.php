@@ -364,10 +364,10 @@ add_filter( 'wp_page_menu_args', 'cbstdsys_page_menu_args' );
  */
 function modify_admin_bar ( $wp_admin_bar ) {
 
-		global $current_user;
+		#global $current_user;
 	
 		// make changes only to non-super-admins
-		if ( !in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) ) {
+		#if ( !in_array($current_user->ID, cbstdsys_opts('a_admin_user_IDs') ) ) {
 
 				// disable by default
 				$wp_admin_bar->remove_node('wp-logo');
@@ -401,7 +401,7 @@ function modify_admin_bar ( $wp_admin_bar ) {
 				// disable search
 				if ( ! cbstdsys_opts('m_search') )
 						$wp_admin_bar->remove_node('search');
-		}
+		#}
 }
 add_action( 'admin_bar_menu', 'modify_admin_bar',999 );
 
