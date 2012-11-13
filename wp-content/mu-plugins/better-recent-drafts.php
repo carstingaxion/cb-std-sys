@@ -44,6 +44,7 @@ function jl_brd_dashboard_recent_drafts( $drafts = false ) {
 			$title = _draft_or_post_title( $draft->ID );
 			$last_id = get_post_meta( $draft->ID, '_edit_last', true);
 			$last_user = get_userdata($last_id);
+      $last_editor = ( is_object( $last_user ) ) ? 'by ' . $last_user->display_name : '';
 			$item  = '<h4><a href="' . $url . '" title="' . __( 'Edit' ) . '">' . esc_html($title) . '</a>';
 			switch ( $draft->post_status ) {
 				case 'pending':
@@ -54,13 +55,17 @@ function jl_brd_dashboard_recent_drafts( $drafts = false ) {
 					$post_status = __('Draft');
 					break;
 			}
+#echo '<pre>'; var_dump($last_user); echo '</pre>';
+
 			$item .= ' - <span class="post-state"><span class="' . strtolower( str_replace( ' ', '-', $draft->post_status ) ) . '">' . $post_status . '</span></span>';
 			$obj = get_post_type_object( $draft->post_type );
 			$item .= '   <small>' . $obj->labels->singular_name . '</small>';
 			$item .= '<abbr class="howto alignright" title="' . 
+ 
+
           sprintf(
-              __('Last edited by %1$s on %2$s at %3$s'), 
-              esc_html( $last_user->display_name ), 
+              __('Last edited %1$s on %2$s at %3$s'), 
+              esc_html( $last_editor ), 
               mysql2date( get_option('date_format'), $draft->post_modified ), 
               mysql2date( get_option('time_format'), $draft->post_modified )
           ) . '">' . 
